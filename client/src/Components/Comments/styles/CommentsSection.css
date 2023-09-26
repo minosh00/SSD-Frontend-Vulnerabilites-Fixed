@@ -1,0 +1,40 @@
+.cs-background{
+    display: flex;
+    flex-direction: column;
+    padding: 12px 20px;
+}
+
+.cs-add-button{
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+}
+
+.cs-comment{
+    padding: 16px 0px;
+}
+
+.search-section {
+    padding: 24px 64px;
+}
+
+.like-section {
+    margin-left: 12px;
+    margin-top: 4px;
+    border-radius: 30px;
+    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-comments{
+    color: gray;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 12px;
+}

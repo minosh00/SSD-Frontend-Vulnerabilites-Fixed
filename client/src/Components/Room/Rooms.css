@@ -1,0 +1,60 @@
+.card {
+    width: 60%;
+    margin-left: 20%;
+    border: none;
+}
+
+.room_img {
+    width: 100%;
+}
+
+.roomtype {
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+}
+
+.smallimg {
+    height: 98%;
+    width: 100% !important;
+    border-radius: 5px !important;
+}
+
+h1 {
+    font-size: 20px !important;
+}
+
+.btnw {
+    background-color: black !important ;
+    float: right; 
+    box-shadow: none !important;
+    color: white !important;
+}
+
+.bs {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-top: 20px !important;
+    border-radius: 5px !important;
+    padding: 20px !important;
+}
+
+.bigimg {
+    height: 300px;
+    width: 600px;
+    border-radius: 5px !important;
+}
+
+.previmg {
+    height: 400px;
+    width: 600px;
+    border-radius: 5px !important;
+}
+
+
+.feat {
+    text-align: justify;
+}
+
+.date {
+    border: 2px solid black;
+    color: black;
+}

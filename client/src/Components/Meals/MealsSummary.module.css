@@ -1,0 +1,40 @@
+.summary {
+    text-align: center;
+    letter-spacing: 1px;
+    max-width: 45rem;
+    width: 90%;
+    margin: auto;
+    margin-top: -10rem;
+    position: relative;
+    background-color: white;
+    color: #383838;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+    font-size: 1.2rem;
+    z-index: 5; /* must have z-index higher than the Carousel main-image(0) & lower than the header(5) */
+}
+
+.summary h2 {
+    font-family: 'Ms Madi', cursive;
+    font-size: 3.5rem;
+    margin-top: 0;
+}
+
+@media (max-width: 415px) {
+    .summary h2 {
+        font-size: 2rem;
+    }
+    .summary p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 415px) and (max-width: 600px) {
+    .summary h2 {
+        font-size: 3rem;
+    }
+    .summary p {
+        font-size: 1rem;
+    }
+}
