@@ -58,3 +58,14 @@ h1 {
     border: 2px solid black;
     color: black;
 }
+
+.amount {
+    color: red;
+    font-weight:bolder;
+    font-size: large;
+}
+
+.am {
+    font-weight:bolder;
+    font-size: large;
+}

@@ -10,6 +10,7 @@ const EditComment = () => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [stars, setStars] = useState(0);
+  const [likes, setLikes] = useState(0);
 
   const [emailError, setEmailError] = useState({ state: false, message: "" });
   const [commentError, setCommentError] = useState({
@@ -25,6 +26,7 @@ const EditComment = () => {
         setEmail(res.data.userEmail);
         setStars(res.data.noOfStars);
         setComment(res.data.comment);
+        setLikes(res.data.likes);
       })
       .catch((e) => {
         console.error(e.message);
@@ -32,7 +34,7 @@ const EditComment = () => {
   }
 
   useEffect(() => {
-    getReview(window.location.pathname.split("/")[3]);
+    getReview(window.location.pathname.split("/")[4]);
     console.log(stars)
   }, [])
 
@@ -68,14 +70,15 @@ const EditComment = () => {
         comment: comment,
         userEmail: email,
         userPNumber: "000003",
-        userImage: "yuioyoieofsdfdgiteytuio",
+        userImage: "",
+        likes: likes,
+        roomID: window.location.pathname.split("/")[3]
       };
 
       axios
         .put(`http://localhost:5000/api/comments/${id}`, payload)
         .then((_res) => {
           alert("Updated!");
-          window.location.href = "/comments-section";
         })
         .catch((e) => console.error(e.message));
     }
@@ -101,7 +104,7 @@ const EditComment = () => {
           onChange={(text) => setComment(text)}
         />
         <CommentButton
-          onClick={() => handleEditComment(window.location.pathname.split("/")[3])}
+          onClick={() => handleEditComment(window.location.pathname.split("/")[4])}
           size="small"
           variant="contained"
           label="Edit Comment"

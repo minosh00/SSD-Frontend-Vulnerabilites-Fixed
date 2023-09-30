@@ -4,7 +4,8 @@ import "jspdf-autotable";
 const SupplyPdfReport = Supplier => {
 
     const payDoc = new jsPDF();
-    const tableColumn = ["Supplier Name", "Company Name", "Supply Item Name", "Supply Amount", "Supply Date", "Total Price"];
+
+    const tableColumn = ["Name", "E-mail Address", "Supplier Name", "Check-in date", "Check-out date", "Total Days"];
     const tableRows = [];
 
     Supplier.forEach(Supplier => {

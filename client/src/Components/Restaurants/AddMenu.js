@@ -1,153 +1,80 @@
-
 import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import logo from '../../images/menuss.png'
+import { Link, useNavigate } from "react-router-dom";
 import { ValidateAddNewMenu } from "./Validation";
+import { MDBBtn } from "mdb-react-ui-kit";
 
 const AddMenu = () => {
 
-  const [name, setfoodName] = useState("");
-  const [price, setprice] = useState();
-  const [description, setDescription] = useState("");
-  const [images, setimages] = useState("");
+    const [name, setfoodName] = useState("");
+    const [price, setprice] = useState();
+    const [description, setDescription] = useState("");
+    const [images, setimages] = useState("");
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-
-  const changeOnClick = (f) => {
-    
-
-    const addmenu = {
-
-        name,
-        price,
-       
-        description,
-        images,
-   
-    };
-//test
-    let validate = ValidateAddNewMenu(addmenu);
-    let msg = validate?.message;
-    if(validate.status == false)
-    {
-        Swal.fire({
-            toast: true,
-            icon: 'warning',
-            html:alert(`${msg}`),
-            animation: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: false,
-        });
-    } else {
-       
+    const changeOnClick = (f) => {
+        const addmenu = {
+            name,
+            price,
+            description,
+            images,
+        };
+        //test
+        let validate = ValidateAddNewMenu(addmenu);
+        let msg = validate?.message;
+        if (validate.status == false) {
+            Swal.fire({
+                toast: true,
+                icon: 'warning',
+                html: alert(`${msg}`),
+                animation: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: false,
+            });
+        } else {
             axios.post("http://localhost:5000/menu/menu", addmenu);
-
             Swal.fire("Congrats", " New Menu Added  successfully", "success")
             navigate("/AllMenus");;
-    
+        }
+    };
 
-    }
-
-    
-    
-  };
-  return (
-
-    <div style={{backgroundColor:"#D5D5CE"}}>
-			      
-		<br/>
-   
-<div className="container-fluid px-1 px-md-7 px-lg-1 px-xl-5 py-10 mx-auto " style={{backgroundColor:"#D5D5CE"}}>
-
-                   <div className="card card0 border-0" style={{backgroundColor:"#D5D5CE"}}>
-               
-                     <br></br>
-               
-                       <div className="row d-flex" >
-                  
-                           <div className="col-lg-6" >
-                               <div className="card1 pb-5">
-                          
-                                   <div className="row px-3 justify-content-center mt-4 mb-5 border-line" > <img  src={logo} style={{height:"240%" ,width:"250%" , marginTop:"40%"}} className="image" /> </div>
-                               </div>
-
-                       
-                           </div>
-
-                           
-                           <div className="col-lg-6">
-                           <h1 style={{color:"red" }} >Add New Menu item  </h1>
-                               <div className="col-lg-6" style={{backgroundColor:"#D5D5CE"}}>
-                               <form onSubmit={changeOnClick} encType="">
-                        
-                               <br></br>
-                            
-                                   <div class="form-floating mb-3">
-                                   <label for="" style={{color:"" , fontSize:"20px"}}>  Food Name </label><br></br><br></br>
-                                       <input type="text" class="form-control" id="floatingInput"  style={{width:"190%"}}    onChange={(f) => setfoodName(f.target.value)}   placeholder="food name " />
-                                   
-                                   </div>
-                                   <div class="form-floating mb-3"><br></br><br></br>
-                                   <label for="floatingPassword" style={{color:"" , fontSize:"20px"}}  >Food Price </label>
-                                       <input  class="form-control" id="floatingPassword"  style={{width:"190%"}}    onChange={(f) => setprice(f.target.value)}    type="number"   placeholder="Food Price " />
-                                     
-                                   </div>
-
-                                  
-                                   <div class="form-floating mb-3"><br></br><br></br>
-                                   <label for="floatingInput"  style={{color:"" , fontSize:"20px"}}  >  Description </label>
-                                    
-                                       <textarea class="form-control" id="exampleFormControlTextarea3"   style={{width:"190%"}}  onChange={(f) => setDescription(f.target.value)}    placeholder=" food Description"    rows="6">
-                                       </textarea>
-
-                                   </div>
-
-
-                                 
-
-                                   <div class="form-floating mb-3"><br></br><br></br>
-                                   <label for="floatingInput"  style={{color:"" , fontSize:"20px"}}  >  Image Link </label>
-                                    
-                                       <textarea class="form-control" id="exampleFormControlTextarea3" style={{width:"190%"}}    onChange={(f) => setimages(f.target.value)}    placeholder="  food image link   "  rows="6">
-                                       </textarea>
-
-                                   </div>
-
-
-
-
-
-
-
-                              
-                                   <div className="row mb-5 px-4">
-                                       <a ><button  type="submit"   style={{ fontSize:"15px"  }}   className="btn btn-danger">Add Menu  </button></a>
-                                      <br></br><br></br>
-                                      <a ><Link  to ="/AllMenus"><button  type="submit"   style={{ fontSize:"10px"  }}    className="btn btn-success">Back to Home    </button></Link></a>
-
-                                   </div>
-                                   </form>
-                                   <div>
-                                     
-                               
-                                       
-                                   </div>
-                                   
-                               </div>
-                           </div>
-                       </div>
-                     
-               
-                   </div>
-               </div>
-               </div>
-
-  );
+    return (
+        <div>
+            <div className="container shadow border border-5 my-5 mx-auto w-50">
+                <div className="col p-3">
+                    <h3 className=" fw-bolder mb-4"><center>Add New Food</center></h3>
+                    <form onSubmit={changeOnClick}>
+                        <div className="row py-3">
+                            <div className="col-md-6">
+                                <label for="name">  Name </label>
+                                <input type="text" class="form-control" onChange={(f) => setfoodName(f.target.value)} placeholder="Enter Food Name" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="type"> Price (LKR) </label>
+                                <input  type="number"class="form-control" id="type" onChange={(f) => setprice(f.target.value)} placeholder="Enter Price (LKR)" required />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="features"> Image URL </label>
+                            <textarea class="form-control" type="text" onChange={(f) => setimages(f.target.value)} placeholder="Enter Image URL" rows="3" required /> <br />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="description"> Description   </label>
+                            <textarea class="form-control" type="text" onChange={(f) => setDescription(f.target.value)} placeholder="Enter Description" rows="6" required />
+                        </div> <br />
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <MDBBtn rounded color="danger" type="submit" className="btn btn-warning"> Add New Menu </MDBBtn>
+                            <a><Link to="/AllMenus"><MDBBtn rounded color="warning" type="submit" className="btn btn-success">Back to Home  </MDBBtn></Link></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default AddMenu;

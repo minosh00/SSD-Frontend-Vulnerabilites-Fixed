@@ -4,6 +4,7 @@ import Modal from '../UI/Modal';
 import classes from './Cart.module.css';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
+import StripeCheckout from 'react-stripe-checkout';
 
 
 
@@ -59,6 +60,12 @@ const Cart = (props) => {
     cartCtx.clearCart();
   };
 
+
+  async function handleToken(token) {
+    console.log(token);
+  }
+
+
   const cartItems = (
     <ul className={classes['cart-items']}>
       {cartCtx.items.map((item) => (
@@ -106,6 +113,19 @@ const Cart = (props) => {
   const didSubmitModalContent = (
     <React.Fragment>
       <p>Successfully sent the order!</p>
+      <StripeCheckout
+        stripeKey="pk_test_51Lr1EmF53OEZBtIfnDtu50k4oS98pyE6AfE0grktJfgVawhf7fEMAIbuSnQLCjXTDqC9PHNoJa2JkuJuZUeCI26300PQrA3w3S"
+        token={handleToken}
+        currency='LKR'>
+
+
+<button class="btn btn-outline-danger" >
+          pay now 
+        </button>
+
+
+      </StripeCheckout>
+
       <div className={classes.actions}>
         <button className={classes.button} onClick={props.onClose}>
           Close

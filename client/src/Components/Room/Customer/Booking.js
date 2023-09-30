@@ -99,6 +99,11 @@ const Booking = () => {
 
     try {
       const result = await axios.post('http://localhost:5000/book/bookroom', bookingDetails)
+      Swal.fire({
+        icon: "success",
+        title: "Congrats...",
+        text: " Booking Success ",
+      });
     } catch (error) {
 
     }
@@ -106,7 +111,26 @@ const Booking = () => {
 
   async function handleToken(token) {
     console.log(token);
+
+    let result;
+    
+    if (result === 200) {
+      Swal.fire({
+        icon: "success",
+        title: "Congrats...",
+        text: " Booking Success ",
+      });
+
+    } else {
+      Swal.fire({
+        icon: "success",
+        title: "Congrats...",
+        text: " Booking Success ",
+      });
+
+    }
   }
+
 
   function onToken(token) {
     console.log(token);
@@ -126,11 +150,6 @@ const Booking = () => {
     <div>
       <div className="container shadow border border-5 my-5 mx-auto w-100">
         <div className="col p-3">
-          <h3 className=" fw-bolder mb-4">
-            <center>Booking Room</center>
-            <br />
-          </h3>
-
           <form>
             <div className="row py-3">
               <div className="col-md-6"> <br /><br /><br />
@@ -138,7 +157,7 @@ const Booking = () => {
               </div>
               <div className="col-md-6">
                 <b>
-                  <h1><b>Booking Details</b></h1>
+                  <h4 className='fw-bolder'>Booking Details</h4>
                   <hr />
                   <div>
                     <table class="table">
@@ -169,23 +188,23 @@ const Booking = () => {
                     </table>
                   </div><br />
                   <div>
-                    <h1><b>Payment Details</b></h1>
+                    <h4 className='fw-bolder'>Payment Details</h4>
                     <hr />
                     <table class="table">
                       <thead>
                         <tr>
                           <th scope="col">Rent Per Day</th>
-                          <th scope="col">LKR: {room.rentperday}/=</th>
+                          <th className="fw-bolder" scope="col">LKR: {room.rentperday}/=</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <th scope="row">Total Days</th>
-                          <td>{totDates}</td>
+                          <td>{totDates} days</td>
                         </tr>
                         <tr>
-                          <th scope="row">Total Amount</th>
-                          <td>LKR: {totAmount}/=</td>
+                          <th className="fw-bolder am" scope="row">Total Amount</th>
+                          <td className='amount'>LKR: {totAmount}/=</td>
                         </tr>
                       </tbody>
                     </table>

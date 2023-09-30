@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { updateEmployeeByID, getEmployeeById } from "./services/Employee";
 import { MDBBtn } from 'mdb-react-ui-kit'
+import { ValidateAddNewMenu } from "./Validation";
+
 
 const UpdateEmployee = () => {
   const navigate = useNavigate();
@@ -77,21 +79,44 @@ const UpdateEmployee = () => {
         Pnumber:Pnumber,
     };
 
-    let data = await updateEmployeeByID(id, newdata);
-    console.log("Update success ", data);
-    if (!data?.data?.suppliername) {
-      {
-        Swal.fire('Congrats', 'Employee Updated successfully ', 'success')
-        navigate("/AllEmployee");
-      }
 
-    } else {
-      {
-        Swal.fire('Congrats', 'Update  successfully ', 'success')
-        navigate("/AllEmployee");
-      }
+    let validate = ValidateAddNewMenu(newdata);
+    let msg = validate?.message;
+    console.log(msg);
+
+    if(validate.status == false)
+    {
+      Swal.fire({
+        toast: true,
+        icon: 'warning',
+        html: `<span>${msg}</span>`,
+        animation: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: false,
+    });
     }
-  };
+
+    
+    else{
+
+      let data = await updateEmployeeByID(id, newdata);
+      console.log("Update success ", data);
+      if (!data?.data?.suppliername) {
+        {
+          Swal.fire('Congrats', 'Update employee  Successfully', 'success')
+          navigate("/AllEmployee");
+        }
+  
+      } else {
+        {
+          Swal.fire('Congrats', 'Update employee Successfully ', 'success')
+          navigate("/AllEmployee");
+        }
+      }
+}
+    }
 
   return (
     <div>

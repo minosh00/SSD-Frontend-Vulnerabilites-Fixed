@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { Button } from 'react-bootstrap'
 import RoomPdfReport from './RoomPdfReport';
+import {RiDeleteBin6Fill} from 'react-icons/ri'
 
 function AllBookings() {
 
@@ -31,7 +32,7 @@ function AllBookings() {
     return (
         <div>
             <div className="">
-                <div className="container shadow border border-5 my-5 mx-auto w-100"> <br />
+                <div className="container shadow my-5 mx-auto"> <br />
                     <h3 className=" fw-bolder mb-4">
                         <center>All Bookings</center>
                         <hr />
@@ -39,7 +40,7 @@ function AllBookings() {
                     <table class="table" Id="FundsTrans">
                         <thead className='table-dark'>
                             <tr>
-                                <th scope='col'>No</th>
+                                <th>#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">E-mail Address</th>
                                 <th scope="col">Room Name</th>
@@ -47,7 +48,7 @@ function AllBookings() {
                                 <th scope="col">Check-out Date</th>
                                 <th scope='col'>Payment</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Delete</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -60,9 +61,9 @@ function AllBookings() {
                                         <td>{topic.room}</td>
                                         <td>{topic.fromdate}</td>
                                         <td>{topic.todate}</td>
-                                        <td>LKR {topic.totAmount}/=</td>
+                                        <td>LKR: {topic.totAmount} /=</td>
                                         <td><button className='btn btn-success'>{topic.status}</button></td>
-                                        <td><button className='btn btn-danger' onClick={() => deleteBooking(topic._id)}>Delete</button></td>
+                                        <td><button className='btn btn-danger' onClick={() => deleteBooking(topic._id)}><RiDeleteBin6Fill/></button></td>
                                     </tr>
                                 )
                                 )
@@ -70,7 +71,7 @@ function AllBookings() {
                         </tbody>
                     </table>
 
-                    <Button className='btn btn-danger search-btn' onClick={() => RoomPdfReport(room)}>Generate Pdf</Button> &nbsp;
+                    <Button className='btn btn-danger' onClick={() => RoomPdfReport(room)}>Generate Pdf</Button> &nbsp;
 
                     <ReactHTMLTableToExcel
                         id="test-table-xls-button"

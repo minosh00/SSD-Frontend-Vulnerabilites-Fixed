@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getRoomsById, updateRoomsByID } from "../services/Room";
 import { MDBBtn } from 'mdb-react-ui-kit'
+import { Validateroom } from "./roomVaildate";
+
 
 const UpdateRooms = () => {
 
@@ -102,21 +104,43 @@ const UpdateRooms = () => {
 
     };
 
-    let data = await updateRoomsByID(id, newdata);
-    console.log("Update success ", data);
-    if (!data?.data?.foodName) {
-      {
-        Swal.fire('Congrats', 'Update room  successfully ', 'success')
-        navigate("/mainroom");
-      }
+    let validate = Validateroom(newdata);
+    let msg = validate?.message;
+    console.log(msg);
 
-    } else {
-      {
-        Swal.fire('Congrats', 'Update room successfully ', 'success')
-        navigate("/mainroom");
-      }
+    if(validate.status == false)
+    {
+      Swal.fire({
+        toast: true,
+        icon: 'warning',
+        html: `<span>${msg}</span>`,
+        animation: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: false,
+    });
     }
-  };
+
+    else{
+
+      let data = await updateRoomsByID(id, newdata);
+      console.log("Update success ", data);
+      if (!data?.data?.name) {
+        {
+          Swal.fire('Congrats', 'Update room  successfully ', 'success')
+          navigate("/mainroom");
+        }
+  
+      } else {
+        {
+          Swal.fire('Congrats', 'Update room successfully ', 'success')
+          navigate("/mainroom");
+        }
+      }
+}
+    }
+
 
   return (
     <div>

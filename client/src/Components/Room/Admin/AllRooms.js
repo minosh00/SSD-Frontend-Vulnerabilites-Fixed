@@ -171,7 +171,7 @@ const AllRooms = () => {
                       <h5> <b>{user.type} Room</b></h5> <br />
                       <h5> <b>Features:</b> </h5>
                       <p className="feat">{user.features}</p> <br />
-                      <h6> <b>Rent Per Day:</b> LKR {user.rentperday}/= </h6> <br />
+                      <h6> <b>Rent Per Day:</b> LKR {user.rentperday}.00 /= </h6> <br />
                       <div className="row">
                         <div className="col-md-6">
                           <h6> <b>Max Count: </b> 0{user.maxcount} </h6> <br />

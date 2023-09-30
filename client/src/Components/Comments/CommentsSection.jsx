@@ -94,7 +94,7 @@ const CommentsSection = () => {
             username={comment.userEmail}
             key={comment._id}
             onDelete={() => deleteComment(comment._id)}
-            onEdit={() => window.location.href = `/comments-section/edit/${comment._id}`}
+            onEdit={() => window.location.href = `/comments-section/edit/${window.location.pathname.split("/")[2]}/${comment._id}`}
           />
           <div className="like-section"><Like onChange={(clicked) => {!clicked? addLike(comment._id): removeLike(comment._id)}} /><span>{comment.likes}</span></div>
         </div>

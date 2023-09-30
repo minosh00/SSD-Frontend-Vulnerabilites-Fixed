@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthCustomer } from "../../Services/AuthServices";
 import { Tabs } from "antd";
 import axios from "axios";
 import logo from '../Auth/loginn.png'
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
+import RoomReport from "../Room/Customer/RoomReport";
+import { Button } from "react-bootstrap";
 const { TabPane } = Tabs;
 
 const Profile = () => {
@@ -48,7 +50,7 @@ const Profile = () => {
   useEffect(() => {
     const getRooms = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/book/getname/Prasadi")
+        const res = await axios.get("http://localhost:5000/book/getname/prasadi@gmail.com")
         setRooms(res.data);
         console.log('render');
       } catch (err) {
@@ -125,18 +127,19 @@ const Profile = () => {
                         <td>{topic.todate}</td>
                         <td>LKR {topic.totAmount}/=</td>
                         <td><button className='btn btn-success'>{topic.status}</button></td>
-                        <td><button className='btn btn-danger'>Request</button></td>
+                        <td><Link to={`/cancelbook/${topic?._id}`}><button className='btn btn-danger'>Request</button></Link></td>
                       </tr>
-                    )
-                    )
+                )
+                )
                   }
-                </tbody>
-              </table>
-            </TabPane>
-          </Tabs>
-        </div>
+              </tbody>
+            </table>
+            <Button className='btn btn-danger' onClick={() => RoomReport(room)}>Generate Pdf</Button> &nbsp; <br />
+          </TabPane>
+        </Tabs> <br />
       </div>
     </div>
+    </div >
   )
 }
 

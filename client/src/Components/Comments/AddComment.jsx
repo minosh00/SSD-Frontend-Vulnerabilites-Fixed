@@ -59,7 +59,9 @@ const AddComment = () => {
         .post("http://localhost:5000/api/comments", payload)
         .then((res) => {
           alert("Added!");
-          window.location.href = "/comments-section";
+          setEmail("");
+          setComment("");
+          setStars(0);
         })
         .catch((e) => console.error(e.message));
     }
@@ -68,17 +70,19 @@ const AddComment = () => {
   return (
     <div className="ac-background">
       <div>
-        <RateComponent onClick={(value) => setStars(value)} size="large" />
+        <RateComponent initValue={stars}  onClick={(value) => setStars(value)} size="large" />
       </div>
       <div className="ac-form">
         <InputField
           error={emailError.state}
+          value={email}
           helperText={emailError.state && emailError.message}
           onChange={(text) => setEmail(text)}
           label="e-mail address"
         />
         <TextArea
           error={commentError.state}
+          value={comment}
           helperText={commentError.state && commentError.message}
           onChange={(text) => setComment(text)}
         />

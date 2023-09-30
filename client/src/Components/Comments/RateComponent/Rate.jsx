@@ -26,7 +26,7 @@ export default function RateComponent({
         size={`${size}`}
         readOnly={readOnly}
         name={caption ? caption : ""}
-        value={value}
+        value={initValue}
         disabled={disabled}
         onClick={onClick && onClick(value)}
         onChange={(_event, newValue) => {

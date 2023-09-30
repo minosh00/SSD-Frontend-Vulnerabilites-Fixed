@@ -4,7 +4,6 @@ export const ValidateAddNewMenu=(formData) =>{
     const messages ={
        FOOD_NAME_EMPTY :"The Food Name should at least be 3 letters...",
        PRICE_EMPTY : "The price should at least be 3 letters...",
-       RESTURANT_TYPE_EMPTY : " The resturant should at least be 3 letters...",
        DESCRIPTION_EMPTY : "The description should at least be 3 letters..."
     };
 
@@ -25,8 +24,7 @@ export const ValidateAddNewMenu=(formData) =>{
         output.message = messages.PRICE_EMPTY;
         output.status = false;
         return output;
-    } 
-  
+    }  
     if(formData.description.length <= 2)
     {
         output.message = messages.DESCRIPTION_EMPTY;

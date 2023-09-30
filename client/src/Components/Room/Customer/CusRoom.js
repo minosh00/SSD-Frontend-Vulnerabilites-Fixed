@@ -15,7 +15,7 @@ const CusRoom = () => (
     <blockquote class="blockquote text-center">
         <div>
             <SimpleImageSlider
-                width={1540}
+                width='100%'
                 height={400}
                 images={images}
                 showBullets={true}

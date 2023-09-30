@@ -20,7 +20,7 @@ import Home from "./components/Layouts/Main";
 import EditMenu from "./components/Restaurants/EditMenu";
 import AddMenu from "./components/Restaurants/AddMenu"
 import Test from "./components/Test"
-
+import AllOrders from "./components/Restaurants/AllOrders"
 
 //sadumini
 import AllEmployee from "./components/Employee/AllEmployee";
@@ -89,7 +89,9 @@ function App() {
         <Route path="/AllMenus" element={<AllMenus />} />
         <Route path="/updateMenuByID/:id" element={<EditMenu />} />
         <Route path="/addMenu" element={<AddMenu />} />
-
+        
+        
+        <Route path="/AllOrders" element={<AllOrders />} />
         <Route path="/Displaymenus" element={<Test />} />
 
 
@@ -105,7 +107,7 @@ function App() {
         <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate" element={<Booking />} />
         <Route path="/comments-section" element={<CommentsSection />} />
         <Route path="/comments-section/create/:roomID" element={<AddComment />} />
-        <Route path="/comments-section/edit/:id" element={<EditComment />} />
+        <Route path="/comments-section/edit/:roomID/:id" element={<EditComment />} />
         <Route path="/allusers" element={<AllUsers />} />
       </Routes>
       <br></br>

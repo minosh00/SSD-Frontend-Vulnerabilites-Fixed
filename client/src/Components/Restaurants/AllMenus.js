@@ -29,7 +29,7 @@ const AllMenus = () => {
   const removefood = id => {
     axios.delete(`http://localhost:5000/menu/RemoveFood/${id}`)
       .then(res => {
-        Swal.fire('Congrats', ' remove successfully ', 'success')
+        Swal.fire('Congrats', 'Remove Successfully ', 'success')
       })
     setusers(users.filter(elem => elem._id !== id))
   }
@@ -45,16 +45,17 @@ const AllMenus = () => {
       <br></br>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <Link to="/addMenu"><MDBBtn color="primary" type="submit">Add New Menu</MDBBtn></Link>
+        <Link to="/AllOrders"><MDBBtn color="primary" type="submit">  All Orders</MDBBtn></Link>
         <Button className='btn btn-danger search-btn' onClick={() => MenuReport(users)}>Generate Pdf</Button> &nbsp; <br />
-      </div> <br/>
+      </div> <br />
 
       <MDBTable align='middle'>
         <MDBTableHead>
           <tr>
-            <th scope='col'>Food Name </th>
-            <th scope='col'>Food Description</th>
-            <th scope='col'>Food Price </th>
-            <th scope='col'>Actions</th>
+            <th scope='col'><b>Food Name</b></th>
+            <th scope='col'><b>Food Description</b></th>
+            <th scope='col'><b>Food Price</b></th>
+            <th scope='col'><b>Actions</b></th>
           </tr>
         </MDBTableHead>
         <MDBTableBody id="cusdet">
@@ -86,7 +87,7 @@ const AllMenus = () => {
                     <td>
                       <p className='fw-normal mb-1'>   {user.description}</p>
                     </td>
-                    <td> LKR {user.price}/=</td>
+                    <td> LKR {user.price}.00 /=</td>
                     <td>
                       <h5><Link to={{ pathname: `/updateMenuByID/${user?._id}` }}><span type="submit" class="badge rounded-pill badge-warning">Update</span></Link></h5>
                       <h5><span onClick={() => removefood(user?._id)} type="submit" class="badge rounded-pill badge-danger">Delete</span></h5>
