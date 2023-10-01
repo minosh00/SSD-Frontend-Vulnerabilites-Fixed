@@ -24,7 +24,7 @@ const AllMenus = () => {
   useEffect(async () => {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/orders/allorder")
+        await axios.get("`${StartUrl}api/orders/allorder")
       ).data;
       setusers(data);
       setloading(false);

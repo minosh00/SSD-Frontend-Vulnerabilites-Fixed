@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { RegisterStudent } from "../../Services/AuthServices";
 import Swal from 'sweetalert2';
 import { ValidateSignUp } from "./Validation";
-import Main from "./Main.css"
 
 import Login from '../../images/test.png';
 const Register = () => {

@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Employee.css";
 import logo from "../../images/menuss.png";
 import { ValidateAddNewMenu } from "./Validation";
+import { StartUrl } from "../../configs/Url.json";
 
 const AddEmployee = () => {
   const [fname, setfname] = useState("");
@@ -38,7 +39,7 @@ const AddEmployee = () => {
     } else {
        
 
-    axios.post("http://localhost:5000/employee/createEmployee", Employee);
+    axios.post(`${StartUrl}api/employees/`, Employee);
 
     Swal.fire("Congrats", " New Employee Added  successfully", "success");
 

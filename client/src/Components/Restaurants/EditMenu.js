@@ -57,8 +57,8 @@ const EditMenu = () => {
       description: description
     };
     let validate = ValidateAddNewMenu(newdata);
-    let msg = validate?.message.toString();
-    console.log(msg);
+    // let msg = validate?.message.toString();
+    console.log(validate);
     if(validate.status == false)
     {
       Swal.fire({

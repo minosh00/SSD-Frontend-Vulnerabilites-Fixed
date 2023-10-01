@@ -4,6 +4,7 @@ import InputField from "./InputFieldComponent/InputField";
 import CommentButton from "./Button/CommentButton";
 import TextArea from "./TextArea/TextArea";
 import axios from "axios";
+import { StartUrl } from "../../configs/Url.json";
 import "./styles/AddComment.css"
 
 const AddComment = () => {
@@ -56,7 +57,7 @@ const AddComment = () => {
       console.log(window.location.pathname.split("/")[3])
 
       axios
-        .post("http://localhost:5000/api/comments", payload)
+        .post(`${StartUrl}api/comments`, payload)
         .then((res) => {
           alert("Added!");
           setEmail("");

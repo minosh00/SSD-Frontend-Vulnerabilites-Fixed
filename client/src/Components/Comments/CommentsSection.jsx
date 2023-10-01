@@ -4,6 +4,7 @@ import CommentButton from "./Button/CommentButton";
 import Comment from "./Comment/Comment";
 import Like from "./LikeComponent/Like";
 import Search from "./Search/Search";
+import { StartUrl } from "../../configs/Url.json";
 import "./styles/CommentsSection.css";
 
 const CommentsSection = () => {
@@ -13,7 +14,7 @@ const CommentsSection = () => {
   const getComments = (comment = '') => {
     console.log()
     axios
-      .get(`http://localhost:5000/api/comments?roomID=${window.location.pathname.split("/")[2]}&comment=${comment}`)
+      .get(`${StartUrl}api/comments?roomID=${window.location.pathname.split("/")[2]}&comment=${comment}`)
       .then((res) => {
         setComments(res.data);
       })
@@ -28,7 +29,7 @@ const CommentsSection = () => {
 
   const deleteComment = (id) => {
     axios
-    .delete(`http://localhost:5000/api/comments/${id}`)
+    .delete(`${StartUrl}api/comments/${id}`)
     .then((_res) => {
       alert('Done!');
       getComments();
@@ -41,7 +42,7 @@ const CommentsSection = () => {
 
   const addLike = (id) => {
     axios
-    .post(`http://localhost:5000/api/comments/${id}/addLike`)
+    .post(`${StartUrl}api/comments/${id}/addLike`)
     .then((_res) => {
       getComments();
     })
@@ -53,7 +54,7 @@ const CommentsSection = () => {
 
   const removeLike = (id) => {
     axios
-    .post(`http://localhost:5000/api/comments/${id}/removeLike`)
+    .post(`${StartUrl}api/comments/${id}/removeLike`)
     .then((_res) => {
       getComments();
     })

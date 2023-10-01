@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { StartUrl } from "../../configs/Url.json";
 
 
-let getAllFoodsURL = "http://localhost:5000/foods/";
+let getAllFoodsURL = `${StartUrl}api/foods/`;
 
 
 export async function getAllFoods() {

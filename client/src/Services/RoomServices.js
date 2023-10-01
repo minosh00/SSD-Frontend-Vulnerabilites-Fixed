@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-let getRoomURL = "http://localhost:5000/api/rooms/";
-let getRoomByIdURL = "http://localhost:5000/api/rooms/";
-let updateRoomByIdURL = "http://localhost:5000/api/rooms/";
+let getRoomURL = "`${StartUrl}api/api/rooms/";
+let getRoomByIdURL = "`${StartUrl}api/api/rooms/";
+let updateRoomByIdURL = "`${StartUrl}api/api/rooms/";
 
 export async function updateRoomByID(id, data) {
     const alldata = {

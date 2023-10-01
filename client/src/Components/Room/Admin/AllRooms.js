@@ -4,6 +4,7 @@ import { Button, Modal, Carousel } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from 'antd';
 import moment from 'moment'
+import { StartUrl } from "../../../configs/Url.json";
 
 const AllRooms = () => {
 
@@ -25,7 +26,7 @@ const AllRooms = () => {
   useEffect(async () => {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/room/getAllRooms/")
+        await axios.get(`${StartUrl}api/rooms`)
       ).data;
       setusers(data);
       setloading(false);
@@ -44,7 +45,7 @@ const AllRooms = () => {
 
   const deleteRoom = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/room/RemoveRooms/${id}`)
+      const res = await axios.delete(`${StartUrl}api/rooms/${id}`)
       const newRoom = users.filter(user => user._id !== id);
       setusers(newRoom);
     } catch (err) {
@@ -53,7 +54,7 @@ const AllRooms = () => {
   }
 
   function SearchAdult() {
-    axios.get(`http://localhost:5000/room/getadult/${adult}`)
+    axios.get(`${StartUrl}api/room/getadult/${adult}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -61,7 +62,7 @@ const AllRooms = () => {
   }
 
   function SearchChildren() {
-    axios.get(`http://localhost:5000/room/getchildren/${children}`)
+    axios.get(`${StartUrl}api/room/getchildren/${children}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -69,7 +70,7 @@ const AllRooms = () => {
   }
 
   function SearchBedroom() {
-    axios.get(`http://localhost:5000/room/getbedroom/${bedroom}`)
+    axios.get(`${StartUrl}api/room/getbedroom/${bedroom}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
