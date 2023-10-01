@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "../Employee/Employee.css";
 import logo from "../../images/menuss.png";
 import { ValidateAddNewMenu } from "./Validation";
+import { StartUrl } from "../../configs/Url.json";
 
 const AddSupplier = () => {
   const [suppliername, setfname] = useState("");
@@ -36,7 +37,7 @@ const AddSupplier = () => {
     } else {
        
 
-    axios.post("http://localhost:5000/supplier/createSupplier", Supplier);
+    axios.post(`${StartUrl}api/suppliers/`, Supplier);
 
     Swal.fire("Congrats", " New Supplier Added  successfully", "success");
 

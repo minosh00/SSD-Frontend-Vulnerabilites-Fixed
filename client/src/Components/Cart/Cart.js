@@ -5,10 +5,11 @@ import classes from './Cart.module.css';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
 import StripeCheckout from 'react-stripe-checkout';
+import { StartUrl } from "../../configs/Url.json";
 
 
 
-const prodBaseUrl = 'http://localhost:5000/orders';
+const prodBaseUrl = `${StartUrl}api/orders`;
 
 const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);
@@ -36,7 +37,7 @@ const Cart = (props) => {
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(prodBaseUrl + '/orders', {
+      const response = await fetch(prodBaseUrl + '/', {
         method: 'POST',
         body: JSON.stringify({
           user: userData,

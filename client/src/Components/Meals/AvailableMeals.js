@@ -4,9 +4,10 @@ import Card from '../UI/Card';
 import classes from './AvailableMeals.module.css';
 import MealItem from './MealItem/MealItem';
 import Spinner from '../UI/Spinner';
+import { StartUrl } from "../../configs/Url.json";
 
 
-const prodBaseUrl = 'http://localhost:5000/menu';
+const prodBaseUrl = `${StartUrl}api/foods`;
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
@@ -15,7 +16,7 @@ const AvailableMeals = () => {
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch(prodBaseUrl + '/getAllMenu');
+      const response = await fetch(prodBaseUrl + '/');
 
       if (!response.ok) {
         throw new Error(`Something went wrong! Status Code ${response.status}`);

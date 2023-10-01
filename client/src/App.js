@@ -38,6 +38,7 @@ import AllRooms from './Components/Room/Admin/AllRooms'
 import MainRoom from './Components/Room/Admin/MainRoom';
 import CusRoom from './Components/Room/Customer/CusRoom';
 import Booking from './Components/Room/Customer/Booking';
+import { StartUrl } from "./configs/Url.json";
 
 import CommentsSection from './Components/Comments/CommentsSection';
 import AddComment from './Components/Comments/AddComment';
@@ -57,7 +58,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/rooms/")
+      .get(`${StartUrl}api/rooms/`)
       .then((res) => setPosts(res.data))
       .catch((error) => console.log(error));
   });

@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { Button } from 'react-bootstrap'
 import UsersReport from './UsersReport';
+import { StartUrl } from "../../configs/Url.json";
 
 const AllUsers = () => {
 
@@ -11,7 +12,7 @@ const AllUsers = () => {
     useEffect(async () => {
         try {
             const data = await (
-                await axios.get("http://localhost:5000/user/getAllUsers")
+                await axios.get(`${StartUrl}api/users`)
             ).data;
             setUsers(data);
         } catch (error) {
@@ -21,7 +22,7 @@ const AllUsers = () => {
 
     const deleteUsers = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/user/deleteUser/${id}`)
+            const res = await axios.delete(`${StartUrl}api/users/${id}`)
             const newRoom = users.filter(users => users._id !== id);
             setUsers(newRoom);
         } catch (err) {

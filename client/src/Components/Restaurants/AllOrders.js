@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { MDBTable, MDBTableHead, MDBTableBody, MDBBtn } from 'mdb-react-ui-kit';
 import { Button } from 'react-bootstrap'
+import { StartUrl } from "../../configs/Url.json";
 
 
 const AllOrders = () => {
@@ -15,7 +16,7 @@ const AllOrders = () => {
   useEffect(async () => {
     try {
       const data = await (
-        await axios.get("http://localhost:5000/orders/allorder/")
+        await axios.get(`${StartUrl}api/orders/`)
       ).data;
       setusers(data);
       console.log(data);
