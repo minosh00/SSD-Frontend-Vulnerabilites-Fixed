@@ -3,49 +3,47 @@ import axios from "axios";
 import { Button, Modal, Carousel } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from 'antd';
-import moment from 'moment'
+import moment from 'moment';
 import { StartUrl } from "../../../configs/Url.json";
 
 const AllRooms = () => {
-
   const { RangePicker } = DatePicker;
-  const [serachItem, setserachItem] = useState([]);
-  const [users, setusers] = useState();
-  const [loading, setloading] = useState(true);
+  const [serachItem, setserachItem] = useState("");
+  const [users, setusers] = useState([]);
+  const [, setloading] = useState(true);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [adult, setAdult] = useState();
-  const [children, setChildren] = useState();
-  const [bedroom, setBedroom] = useState();
+  const [adult, setAdult] = useState("");
+  const [children, setChildren] = useState("");
+  const [bedroom, setBedroom] = useState("");
 
-  const [fromdate, setFromdate] = useState();
-  const [todate, setTodate] = useState();
+  const [, setFromdate] = useState("");
+  const [, setTodate] = useState("");
 
-  useEffect(async () => {
-    try {
-      const data = await (
-        await axios.get(`${StartUrl}api/rooms`)
-      ).data;
-      setusers(data);
-      setloading(false);
-    } catch (error) {
-      console.log(error);
-      setloading(false);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${StartUrl}api/rooms`);
+        setusers(data);
+        setloading(false);
+      } catch (error) {
+        console.log(error);
+        setloading(false);
+      }
+    };
+    fetchData();
   }, []);
 
   function filterbyDate(dates) {
-    console.log(moment(dates[0]).format('YYYY-MM-DD'))
-    console.log(moment(dates[1]).format('YYYY-MM-DD'))
-    setFromdate(moment(dates[0]).format('YYYY-MM-DD'))
-    setTodate(moment(dates[1]).format('YYYY-MM-DD'))
+    setFromdate(moment(dates[0]).format('YYYY-MM-DD'));
+    setTodate(moment(dates[1]).format('YYYY-MM-DD'));
   }
 
   const deleteRoom = async (id) => {
     try {
-      const res = await axios.delete(`${StartUrl}api/rooms/${id}`)
+      await axios.delete(`${StartUrl}api/rooms/${id}`);
       const newRoom = users.filter(user => user._id !== id);
       setusers(newRoom);
     } catch (err) {
@@ -54,7 +52,7 @@ const AllRooms = () => {
   }
 
   function SearchAdult() {
-    axios.get(`${StartUrl}api/room/getadult/${adult}`)
+    axios.get(`${StartUrl}api/rooms/adult/${adult}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -62,7 +60,7 @@ const AllRooms = () => {
   }
 
   function SearchChildren() {
-    axios.get(`${StartUrl}api/room/getchildren/${children}`)
+    axios.get(`${StartUrl}api/rooms/children/${children}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -70,7 +68,7 @@ const AllRooms = () => {
   }
 
   function SearchBedroom() {
-    axios.get(`${StartUrl}api/room/getbedroom/${bedroom}`)
+    axios.get(`${StartUrl}api/rooms/bedroom/${bedroom}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -97,7 +95,6 @@ const AllRooms = () => {
           </Link>
         </div>
 
-
         <br /> <br /><br />
 
         <div className="row">
@@ -116,7 +113,7 @@ const AllRooms = () => {
                 <option>4</option>
                 <option>5</option>
               </select>
-              <Button className='btn btn-dark search-btn' onClick={() => { SearchAdult({ adult }) }}>Search</Button>
+              <Button className='btn btn-dark search-btn' onClick={SearchAdult}>Search</Button>
             </div>
           </div>
 
@@ -129,7 +126,7 @@ const AllRooms = () => {
                 <option>3</option>
                 <option>4</option>
               </select>
-              <Button className='btn btn-dark search-btn' onClick={() => { SearchChildren({ children }) }}>Search</Button>
+              <Button className='btn btn-dark search-btn' onClick={SearchChildren}>Search</Button>
             </div>
           </div>
 
@@ -142,27 +139,27 @@ const AllRooms = () => {
                 <option>3</option>
                 <option>4</option>
               </select>
-              <Button className='btn btn-dark search-btn' onClick={() => { SearchBedroom({ bedroom }) }}>Search</Button>
+              <Button className='btn btn-dark search-btn' onClick={SearchBedroom}>Search</Button>
             </div>
             <br />
             <br />
           </div>
         </div>
 
-
         <div className="">
           <div className="container">
             {users &&
-              users.filter((users) => {
-                if (serachItem == "") {
-                  return users
-                } else if (users.type.toLowerCase().includes(serachItem.toLowerCase())) {
-                  return users
-                }
-              })
-
+              users
+                // eslint-disable-next-line array-callback-return
+                .filter((user) => {
+                  if (serachItem === "") {
+                    return user;
+                  } else if (user.type.toLowerCase().includes(serachItem.toLowerCase())) {
+                    return user;
+                  }
+                })
                 .map((user) => (
-                  <div className="row bs" key={1}><br></br>
+                  <div className="row bs" key={user._id}><br></br>
                     <h3> {user.name}</h3> <br /><br />
                     <div className="col-md-6"   >
                       <img src={user.imageurls[0]} className="smallimg" alt="" />
@@ -199,12 +196,12 @@ const AllRooms = () => {
 
                         <Carousel prevLabel='' nextLabel=''>
                           {
-                            user.imageurls.map(url => {
-                              return <Carousel.Item>
-                                <img className='d-block w-100 bigimg' src={url} />
-                                <h5 id="roomdet" > {user.description} </h5>
+                            user.imageurls.map(url => (
+                              <Carousel.Item key={url}>
+                                <img className='d-block w-100 bigimg' src={url} alt="" />
+                                <h5 id="roomdet">{user.description}</h5>
                               </Carousel.Item>
-                            })
+                            ))
                           }
                         </Carousel>
                       </Modal.Body>
@@ -217,7 +214,7 @@ const AllRooms = () => {
 
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                       <button className='btn btn-primary' onClick={handleShow}>View Details</button>
-                      <Link to={`/updateRoomsByID/${user?._id}`}>
+                      <Link to={`/updateRoomsByID/${user._id}`}>
                         <button className='btn btn-success'> Update Room</button>
                       </Link>
                       <button className='btn btn-danger' onClick={() => deleteRoom(user._id)}>Delete Room</button>
@@ -231,4 +228,4 @@ const AllRooms = () => {
   )
 }
 
-export default AllRooms
+export default AllRooms;

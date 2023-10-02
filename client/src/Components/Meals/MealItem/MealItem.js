@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import CartContext from '../../../store/cart-context';
-import classes from './MealItem.module.css';
 import MealItemForm from './MealItemForm';
+import classes from './MealItem.module.css';
 
 const MealItem = (props) => {
   const cartCtx = useContext(CartContext);
@@ -14,7 +14,8 @@ const MealItem = (props) => {
       name: props.name,
       amount: amount,
       price: props.price,
-      images:<img src={classes.images}className='card-img-top img-fluid' />
+      // Fix the image import here
+      image: props.image, // Assuming props.image contains the image URL
     });
   };
 
@@ -24,8 +25,10 @@ const MealItem = (props) => {
         <h3>{props.name}</h3>
         <div className={classes.description}>{props.description}</div>
         <div className={classes.price}>{price}</div>
-        <div ><img src={classes.images}className='card-img-top img-fluid' /></div>
-
+        <div>
+          {/* Use props.image for the image source */}
+          <img src={props.image} className='card-img-top img-fluid' alt={props.name} />
+        </div>
       </div>
       <div>
         <MealItemForm id={props.id} onAddToCart={addToCartHandler} />

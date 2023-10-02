@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import DescriptionAlert from '../UI/DescriptionAlert';
-import Card from '../UI/Card';
-import classes from './AvailableMeals.module.css';
-import MealItem from './MealItem/MealItem';
-import Spinner from '../UI/Spinner';
+import { useEffect, useState } from "react";
+import DescriptionAlert from "../UI/DescriptionAlert";
+import Card from "../UI/Card";
+import classes from "./AvailableMeals.module.css";
+import MealItem from "./MealItem/MealItem";
+import Spinner from "../UI/Spinner";
 import { StartUrl } from "../../configs/Url.json";
-
 
 const prodBaseUrl = `${StartUrl}api/foods`;
 
@@ -16,7 +15,7 @@ const AvailableMeals = () => {
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch(prodBaseUrl + '/');
+      const response = await fetch(prodBaseUrl + "/");
 
       if (!response.ok) {
         throw new Error(`Something went wrong! Status Code ${response.status}`);
@@ -31,11 +30,7 @@ const AvailableMeals = () => {
           name: meal.name,
           description: meal.description,
           price: meal.price,
-          images:meal.images
-  
-  
-
-        
+          images: meal.images,
         });
       }
 
@@ -60,7 +55,7 @@ const AvailableMeals = () => {
   if (httpError) {
     return (
       <section className={classes.mealsError}>
-        <DescriptionAlert alertType="error" alertMessage={httpError}/>
+        <DescriptionAlert alertType="error" alertMessage={httpError} />
       </section>
     );
   }
@@ -72,7 +67,8 @@ const AvailableMeals = () => {
       name={meal.name}
       description={meal.description}
       price={meal.price}
-      images={<img src={meal.images}className='card-img-top img-fluid' />}
+      // eslint-disable-next-line jsx-a11y/alt-text
+      images={<img src={meal.images} className="card-img-top img-fluid" />}
     />
   ));
 

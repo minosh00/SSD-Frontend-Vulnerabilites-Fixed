@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import './Search.css'
+import React from "react";
+import "./Search.css";
 
-const Search = ({setSearchText}) => {
-
+const Search = ({ setSearchText }) => {
   return (
-    <input className='search-component' placeholder='Search' onChange={(e) => setSearchText(e.target.value)} />
-  )
-}
+    <input
+      className="search-component"
+      placeholder="Search"
+      onChange={(e) => setSearchText(e.target.value)}
+    />
+  );
+};
 
-export default Search
+export default Search;

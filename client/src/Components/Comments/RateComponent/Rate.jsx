@@ -15,7 +15,7 @@ export default function RateComponent({
 
   React.useEffect(() => {
     setValue(initValue);
-  }, []);
+  }, [initValue]);
 
   return (
     <div className="w-fit">
