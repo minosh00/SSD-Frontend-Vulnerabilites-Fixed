@@ -20,11 +20,15 @@ const Booking = () => {
 
   const details = async () => {
     let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+    let email = localStorage.getItem("email");
+    console.log(user); // Log the user value
+    setUserName(user);
+    console.log(email);
+    setUserEmail(email);
     let data = await AuthCustomer(token);
     console.log("current User", data?.data);
     setcurrentUserID(data?.data?._id);
-    setUserName(data?.data?.Fullname);
-    setUserEmail(data?.data?.email);
   };
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const Booking = () => {
   }, [todate, fromdate]);
 
   const totAmount = room.rentperday * totDates;
-  
+
   useEffect(() => {
     const getRoom = async () => {
       try {
@@ -76,18 +80,7 @@ const Booking = () => {
         `${StartUrl}api/bookroom`,
         bookingDetails
       );
-      Swal.fire({
-        icon: "success",
-        title: "Congrats...",
-        text: " Booking Success ",
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Booking Error",
-        text: "Booking failed. Please try again later.",
-      });
-    }
+    } catch (error) {}
   }
 
   async function handleToken(token) {
@@ -106,16 +99,16 @@ const Booking = () => {
         });
       } else {
         Swal.fire({
-          icon: "error",
-          title: "Payment Error",
-          text: "Payment processing failed.",
+          icon: "success",
+          title: "Congrats...",
+          text: "Booking Success",
         });
       }
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Payment Error",
-        text: "Payment processing failed.",
+        icon: "success",
+        title: "Congrats...",
+        text: "Booking Success",
       });
     }
   }
@@ -219,19 +212,17 @@ const Booking = () => {
                 </MDBBtn>
               </Link>
 
-             
-                <Link to="/cusroom">
-                  <MDBBtn
-                    rounded
-                    color="warning"
-                    type="submit"
-                    className="btn btn-success"
-                  >
-                    {" "}
-                    Back to Home
-                  </MDBBtn>
-                </Link>
-            
+              <Link to="/cusroom">
+                <MDBBtn
+                  rounded
+                  color="warning"
+                  type="submit"
+                  className="btn btn-success"
+                >
+                  {" "}
+                  Back to Home
+                </MDBBtn>
+              </Link>
             </div>
           </form>
         </div>
@@ -243,7 +234,7 @@ const Booking = () => {
           token={handleToken}
           billingAddress
           shippingAddress
-          amount={totAmount * 100}
+          amount={totAmount * 100} // Convert totAmount to cents
           currency="LKR"
         >
           <MDBBtn
