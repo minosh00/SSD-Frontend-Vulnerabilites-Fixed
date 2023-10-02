@@ -8,26 +8,31 @@ import { Button } from "react-bootstrap";
 import { StartUrl } from "../../configs/Url.json";
 
 const AllMenus = () => {
-  const [serachItem, setserachItem] = useState([]);
-  const [users, setusers] = useState();
-  const [loading, setloading] = useState(true);
+  const [searchItem, setSearchItem] = useState("");
+  const [menus, setMenus] = useState([]);
+  const [, setLoading] = useState(true);
 
-  useEffect(async () => {
-    try {
-      const data = await (await axios.get(`${StartUrl}api/foods`)).data;
-      setusers(data);
-      setloading(false);
-    } catch (error) {
-      console.log(error);
-      setloading(false);
-    }
+  useEffect(() => {
+    const fetchMenus = async () => {
+      try {
+        const response = await axios.get(`${StartUrl}api/foods`);
+        setMenus(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchMenus();
   }, []);
 
-  const removefood = (id) => {
+  const removeFood = (id) => {
     axios.delete(`${StartUrl}api/foods/${id}`).then((res) => {
       Swal.fire("Congrats", "Remove Successfully ", "success");
     });
-    setusers(users.filter((elem) => elem._id !== id));
+
+    setMenus(menus.filter((elem) => elem._id !== id));
   };
 
   return (
@@ -40,16 +45,16 @@ const AllMenus = () => {
           <input
             type="search"
             class="form-control"
-            placeholder="Search by Room Name"
+            placeholder="Search by Food Name"
             aria-label="Search"
             onChange={(event) => {
-              setserachItem(event.target.value);
+              setSearchItem(event.target.value);
             }}
             aria-describedby="search-addon"
           />
         </div>
       </div>
-      <br></br>
+      <br />
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <Link to="/addMenu">
           <MDBBtn color="primary" type="submit">
@@ -58,18 +63,17 @@ const AllMenus = () => {
         </Link>
         <Link to="/AllOrders">
           <MDBBtn color="primary" type="submit">
-            {" "}
             All Orders
           </MDBBtn>
         </Link>
         <Button
           className="btn btn-danger search-btn"
-          onClick={() => MenuReport(users)}
+          onClick={() => MenuReport(menus)}
         >
           Generate Pdf
         </Button>{" "}
         &nbsp; <br />
-      </div>{" "}
+      </div>
       <br />
       <MDBTable align="middle">
         <MDBTableHead>
@@ -89,64 +93,56 @@ const AllMenus = () => {
           </tr>
         </MDBTableHead>
         <MDBTableBody id="cusdet">
-          {users &&
-            users
-              .filter((users) => {
-                if (serachItem == "") {
-                  return users;
-                } else if (
-                  users.name.toLowerCase().includes(serachItem.toLowerCase())
-                ) {
-                  return users;
-                }
-              })
-              .map((user) => {
-                return (
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img
-                          src={user.images}
-                          alt=""
-                          style={{ width: "45px", height: "45px" }}
-                          className="rounded-circle"
-                        />
-                        <div className="ms-3">
-                          <p className="fw-bold mb-1">{user.name}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p className="fw-normal mb-1"> {user.description}</p>
-                    </td>
-                    <td> LKR {user.price}.00 /=</td>
-                    <td>
-                      <h5>
-                        <Link to={{ pathname: `/updateMenuByID/${user?._id}` }}>
-                          <span
-                            type="submit"
-                            class="badge rounded-pill badge-warning"
-                          >
-                            Update
-                          </span>
-                        </Link>
-                      </h5>
-                      <h5>
-                        <span
-                          onClick={() => removefood(user?._id)}
-                          type="submit"
-                          class="badge rounded-pill badge-danger"
-                        >
-                          Delete
-                        </span>
-                      </h5>
-                    </td>
-                  </tr>
-                );
-              })}
+          {menus
+            .filter((menu) =>
+              menu.name.toLowerCase().includes(searchItem.toLowerCase())
+            )
+            .map((menu) => (
+              <tr key={menu._id}>
+                <td>
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={menu.images}
+                      alt=""
+                      style={{ width: "45px", height: "45px" }}
+                      className="rounded-circle"
+                    />
+                    <div className="ms-3">
+                      <p className="fw-bold mb-1">{menu.name}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p className="fw-normal mb-1"> {menu.description}</p>
+                </td>
+                <td> LKR {menu.price}.00 /=</td>
+                <td>
+                  <h5>
+                    <Link to={{ pathname: `/updateMenuByID/${menu._id}` }}>
+                      <span
+                        type="submit"
+                        class="badge rounded-pill badge-warning"
+                      >
+                        Update
+                      </span>
+                    </Link>
+                  </h5>
+                  <h5>
+                    <span
+                      onClick={() => removeFood(menu._id)}
+                      type="submit"
+                      class="badge rounded-pill badge-danger"
+                    >
+                      Delete
+                    </span>
+                  </h5>
+                </td>
+              </tr>
+            ))}
         </MDBTableBody>
       </MDBTable>
     </div>
   );
 };
+
 export default AllMenus;

@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
-import CartContext from '../../store/cart-context';
-import Modal from '../UI/Modal';
-import classes from './Cart.module.css';
-import CartItem from './CartItem';
-import Checkout from './Checkout';
-import StripeCheckout from 'react-stripe-checkout';
+import React, { useContext, useState } from "react";
+import CartContext from "../../store/cart-context";
+import Modal from "../UI/Modal";
+import classes from "./Cart.module.css";
+import CartItem from "./CartItem";
+import Checkout from "./Checkout";
+import StripeCheckout from "react-stripe-checkout";
 import { StartUrl } from "../../configs/Url.json";
-
-
 
 const prodBaseUrl = `${StartUrl}api/orders`;
 
@@ -37,14 +35,14 @@ const Cart = (props) => {
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(prodBaseUrl + '/', {
-        method: 'POST',
+      const response = await fetch(prodBaseUrl + "/", {
+        method: "POST",
         body: JSON.stringify({
           user: userData,
           orderedItems: cartCtx.items,
         }),
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -61,14 +59,12 @@ const Cart = (props) => {
     cartCtx.clearCart();
   };
 
-
   async function handleToken(token) {
     console.log(token);
   }
 
-
   const cartItems = (
-    <ul className={classes['cart-items']}>
+    <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
         <CartItem
           key={item.id}
@@ -84,7 +80,7 @@ const Cart = (props) => {
 
   const modalActions = (
     <div className={classes.actions}>
-      <button className={classes['button--alt']} onClick={props.onClose}>
+      <button className={classes["button--alt"]} onClick={props.onClose}>
         Close
       </button>
       {hasItems && (
@@ -117,14 +113,9 @@ const Cart = (props) => {
       <StripeCheckout
         stripeKey="pk_test_51Lr1EmF53OEZBtIfnDtu50k4oS98pyE6AfE0grktJfgVawhf7fEMAIbuSnQLCjXTDqC9PHNoJa2JkuJuZUeCI26300PQrA3w3S"
         token={handleToken}
-        currency='LKR'>
-
-
-<button class="btn btn-outline-danger" >
-          pay now 
-        </button>
-
-
+        currency="LKR"
+      >
+        <button class="btn btn-outline-danger">pay now</button>
       </StripeCheckout>
 
       <div className={classes.actions}>

@@ -1,7 +1,6 @@
 import Swal from "sweetalert2";
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { MDBBtn } from "mdb-react-ui-kit";
 import CommentsSection from "../../Comments/CommentsSection";
 import StripeCheckout from "react-stripe-checkout";
@@ -11,38 +10,13 @@ import { getRoomsById } from "../services/Room";
 import { StartUrl } from "../../../configs/Url.json";
 
 const Booking = () => {
-  const navigate = useNavigate();
-
-  const handleSubmit = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userRole");
-    navigate("/Login");
-  };
-
   const [Fullname, setUserName] = useState("");
   const [email, setUserEmail] = useState("");
-  const [currentUserID, setcurrentUserID] = useState("");
-
-  const handleUserName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const handleUserEmail = (e) => {
-    setUserEmail(e.target.value);
-  };
-
+  const [, setcurrentUserID] = useState("");
   const { id, fromdate, todate } = useParams();
-
   const [room, setRoom] = useState([]);
-
-  const [name, setname] = useState("");
   const [totDates, setTotDates] = useState("");
-  const [maxcount, setmaxcount] = useState();
-  const [rentperday, setrentperday] = useState("");
-  const [type, settype] = useState("");
   const [imageurls, setimageurls] = useState("");
-  const [features, setfeatures] = useState("");
-  const [description, setdescription] = useState("");
 
   const details = async () => {
     let token = localStorage.getItem("token");
@@ -71,7 +45,7 @@ const Booking = () => {
   }, [todate, fromdate]);
 
   const totAmount = room.rentperday * totDates;
-
+  
   useEffect(() => {
     const getRoom = async () => {
       try {
@@ -83,7 +57,7 @@ const Booking = () => {
       }
     };
     getRoom();
-  }, []);
+  }, [id]);
 
   async function bookRoom() {
     const bookingDetails = {
@@ -93,7 +67,7 @@ const Booking = () => {
       email,
       fromdate,
       todate,
-      totAmount,
+      totAmount: room.rentperday * totDates,
       totDates,
     };
 
@@ -107,31 +81,43 @@ const Booking = () => {
         title: "Congrats...",
         text: " Booking Success ",
       });
-    } catch (error) {}
-  }
-
-  async function handleToken(token) {
-    console.log(token);
-
-    let result;
-
-    if (result === 200) {
+    } catch (error) {
       Swal.fire({
-        icon: "success",
-        title: "Congrats...",
-        text: " Booking Success ",
-      });
-    } else {
-      Swal.fire({
-        icon: "success",
-        title: "Congrats...",
-        text: " Booking Success ",
+        icon: "error",
+        title: "Booking Error",
+        text: "Booking failed. Please try again later.",
       });
     }
   }
 
-  function onToken(token) {
-    console.log(token);
+  async function handleToken(token) {
+    try {
+      // Send the token to your server for payment processing
+      const response = await axios.post(`${StartUrl}api/processPayment`, {
+        token,
+        amount: room.rentperday * totDates * 100, // Convert to cents
+      });
+
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Congrats...",
+          text: "Booking Success",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Payment Error",
+          text: "Payment processing failed.",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Payment Error",
+        text: "Payment processing failed.",
+      });
+    }
   }
 
   const GetData = async () => {
@@ -142,7 +128,7 @@ const Booking = () => {
 
   useEffect(() => {
     GetData();
-  }, []);
+  }, [id]);
 
   return (
     <div>
@@ -233,7 +219,7 @@ const Booking = () => {
                 </MDBBtn>
               </Link>
 
-              <a>
+             
                 <Link to="/cusroom">
                   <MDBBtn
                     rounded
@@ -245,7 +231,7 @@ const Booking = () => {
                     Back to Home
                   </MDBBtn>
                 </Link>
-              </a>
+            
             </div>
           </form>
         </div>

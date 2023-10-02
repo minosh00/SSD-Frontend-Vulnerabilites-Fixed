@@ -36,7 +36,7 @@ const AddRoom = () => {
 
         let validate = Validateroom(AddRoom);
         let msg = validate?.message;
-        if (validate.status == false) {
+        if (validate.status === false) {
             Swal.fire({
                 toast: true,
                 icon: 'warning',
@@ -112,8 +112,8 @@ const AddRoom = () => {
                             <textarea class="form-control" onChange={(f) => setdescription(f.target.value)} type="text" placeholder="Enter Description" rows="6" />
                         </div> <br />
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a><MDBBtn rounded color="danger" type="submit" className="btn btn-danger"> Add  New Rooms </MDBBtn> </a>
-                            <a><Link to="/"><MDBBtn rounded color="warning" type="submit" className="btn btn-success">Back to Home  </MDBBtn></Link></a>
+                            <MDBBtn rounded color="danger" type="submit" className="btn btn-danger"> Add  New Rooms </MDBBtn> 
+                            <Link to="/"><MDBBtn rounded color="warning" type="submit" className="btn btn-success">Back to Home  </MDBBtn></Link>
                         </div>
                     </form>
                 </div>

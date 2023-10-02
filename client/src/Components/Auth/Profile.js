@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthCustomer } from "../../Services/AuthServices";
 import { Tabs } from "antd";
 import axios from "axios";
@@ -23,17 +23,9 @@ import { Button } from "react-bootstrap";
 import { StartUrl } from "../../configs/Url.json";
 const { TabPane } = Tabs;
 const Profile = () => {
-  const navigate = useNavigate();
-
-  const handleSubmit = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userRole");
-    navigate("/Login");
-  };
-
   const [Fullname, setUserName] = useState("");
   const [email, setUserEmail] = useState("");
-  const [currentUserID, setcurrentUserID] = useState("");
+  const [, setcurrentUserID] = useState("");
   const [room, setRooms] = useState([]);
 
   const handleUserName = (e) => {
@@ -120,7 +112,6 @@ const Profile = () => {
                             readOnly
                           ></span>{" "}
                           {email}
-                          <a href="#!"></a>
                         </MDBCardText>
                         <div className="mb-4 pb-2">
                           <MDBBtn outline floating>

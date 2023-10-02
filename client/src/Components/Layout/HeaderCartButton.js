@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import CartContext from '../../store/cart-context';
-import CartIcon from '../Cart/CartIcon';
-import './HeaderCartButton.css';
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../../store/cart-context";
+import CartIcon from "../Cart/CartIcon";
+import "./HeaderCartButton.css";
 
 const HeaderCartButton = (props) => {
   const [btnIsHighlighted, setBtnIsHighlighted] = useState(false); // controls whether or not the button should be animated
@@ -12,7 +12,7 @@ const HeaderCartButton = (props) => {
     return curNumber + item.amount;
   }, 0);
 
-  const btnClasses = `button ${btnIsHighlighted ? 'bump' : ''}`;
+  const btnClasses = `button ${btnIsHighlighted ? "bump" : ""}`;
   const { items } = cartCtx;
 
   // using the useEffect hook for adding animation on HeaderCartButton whenever the amount of items in the cart changes
@@ -35,11 +35,11 @@ const HeaderCartButton = (props) => {
 
   return (
     <button className={btnClasses} onClick={props.onClick}>
-      <span className='icon'>
+      <span className="icon">
         <CartIcon />
       </span>
-      <span className='text'>Your Cart</span>
-      <span className='badge'>{numberOfCartItems}</span>
+      <span className="text">Your Cart</span>
+      <span className="badge">{numberOfCartItems}</span>
     </button>
   );
 };

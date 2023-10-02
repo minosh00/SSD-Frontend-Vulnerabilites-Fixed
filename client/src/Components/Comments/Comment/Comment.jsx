@@ -35,7 +35,9 @@ const Comment = ({ commentText, username, image, stars, onDelete, onEdit }) => {
         <span className="comment-image">
           {username.charAt(0).toUpperCase()}
         </span>
-        <span className="comment-image">{username.charAt(0).toUpperCase()}</span>
+        <span className="comment-image">
+          {username.charAt(0).toUpperCase()}
+        </span>
         <span className="comment-text">{commentText}</span>
         {user && user.email === username && (
           <section className="button-section">
@@ -54,9 +56,7 @@ const Comment = ({ commentText, username, image, stars, onDelete, onEdit }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             This will permanently delete your comment

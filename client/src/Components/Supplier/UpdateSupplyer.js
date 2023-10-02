@@ -1,6 +1,5 @@
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import React from "react";
-import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { updateSupplierByID, getSupplierById } from "./services/Sup";
 import { MDBBtn } from "mdb-react-ui-kit";
@@ -9,52 +8,56 @@ const UpdateSupplyer = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [suppliername, SETsuppliername] = useState("");
-  const [supplierCompanyName, SETsupplierCompanyName] = useState();
-  const [SupplyItemsname, SETSupplyItemsname] = useState("");
-  const [SupplyAmount, SETSupplyAmount] = useState("");
-  const [SupplyDate, SETSupplyDate] = useState("");
-  const [totalPrice, SETtotalPrice] = useState("");
+  const [suppliername, setSupplierName] = useState("");
+  const [supplierCompanyName, setSupplierCompanyName] = useState("");
+  const [SupplyItemsname, setSupplyItemsName] = useState("");
+  const [SupplyAmount, setSupplyAmount] = useState("");
+  const [SupplyDate, setSupplyDate] = useState("");
+  const [totalPrice, setTotalPrice] = useState("");
 
   const handleSuppliername = (e) => {
-    SETsuppliername(e.target.value);
+    setSupplierName(e.target.value);
   };
 
   const handleCompanyname = (e) => {
-    SETsupplierCompanyName(e.target.value);
+    setSupplierCompanyName(e.target.value);
   };
 
   const handleItemname = (e) => {
-    SETSupplyItemsname(e.target.value);
+    setSupplyItemsName(e.target.value);
   };
 
   const handleAmount = (e) => {
-    SETSupplyAmount(e.target.value);
+    setSupplyAmount(e.target.value);
   };
 
   const handleSupplyDate = (e) => {
-    SETSupplyDate(e.target.value);
+    setSupplyDate(e.target.value);
   };
 
   const handletotPrice = (e) => {
-    SETtotalPrice(e.target.value);
+    setTotalPrice(e.target.value);
   };
 
   const GetData = async () => {
-    let data = await getSupplierById(id);
-    console.log("Update Supplier", data);
+    try {
+      const data = await getSupplierById(id);
+      console.log("Update Supplier", data);
 
-    SETsuppliername(data?.data?.suppliername);
-    SETsupplierCompanyName(data?.data?.supplierCompanyName);
-    SETSupplyItemsname(data?.data?.SupplyItemsname);
-    SETSupplyAmount(data?.data?.SupplyAmount);
-    SETSupplyDate(data?.data?.SupplyDate);
-    SETtotalPrice(data?.data?.totalPrice);
+      setSupplierName(data?.data?.suppliername);
+      setSupplierCompanyName(data?.data?.supplierCompanyName);
+      setSupplyItemsName(data?.data?.SupplyItemsname);
+      setSupplyAmount(data?.data?.SupplyAmount);
+      setSupplyDate(data?.data?.SupplyDate);
+      setTotalPrice(data?.data?.totalPrice);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     GetData();
-  }, []);
+  });
 
   const UpdateData = async (e) => {
     e.preventDefault();
@@ -67,18 +70,19 @@ const UpdateSupplyer = () => {
       totalPrice: totalPrice,
     };
 
-    let data = await updateSupplierByID(id, newdata);
-    console.log("Update success ", data);
-    if (!data?.data?.suppliername) {
-      {
-        Swal.fire("Congrats", "Supplier Updated successfully ", "success");
+    try {
+      const data = await updateSupplierByID(id, newdata);
+      console.log("Update success", data);
+
+      if (!data?.data?.suppliername) {
+        Swal.fire("Congrats", "Supplier Updated successfully", "success");
+        navigate("/AllSuppliers");
+      } else {
+        Swal.fire("Congrats", "Update successfully", "success");
         navigate("/AllSuppliers");
       }
-    } else {
-      {
-        Swal.fire("Congrats", "Update  successfully ", "success");
-        navigate("/AllSuppliers");
-      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -86,34 +90,32 @@ const UpdateSupplyer = () => {
     <div>
       <div className="container shadow border border-5 my-5 mx-auto w-50">
         <div className="col p-3">
-          <h3 className=" fw-bolder mb-4">
+          <h3 className="fw-bolder mb-4">
             <center>Update Supplier Details</center>
           </h3>
           <form>
             <div className="row py-3">
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Supplier Name{" "}
+              <div className="col-md-6">
+                <label htmlFor="supplierName" className="form-label">
+                  Supplier Name
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="floatingInput"
+                  className="form-control"
+                  id="supplierName"
                   value={suppliername}
                   onChange={handleSuppliername}
                   required
                 />
               </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Supplier Company{" "}
+              <div className="col-md-6">
+                <label htmlFor="companyName" className="form-label">
+                  Supplier Company
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="floatingPassword"
+                  className="form-control"
+                  id="companyName"
                   value={supplierCompanyName}
                   onChange={handleCompanyname}
                   required
@@ -121,29 +123,27 @@ const UpdateSupplyer = () => {
               </div>
             </div>
             <div className="row py-3">
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Supplies Items{" "}
+              <div className="col-md-6">
+                <label htmlFor="items" className="form-label">
+                  Supplies Items
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="exampleFormControlTextarea3"
+                  className="form-control"
+                  id="items"
                   value={SupplyItemsname}
                   onChange={handleItemname}
                   required
                 />
               </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Supplies Amount{" "}
+              <div className="col-md-6">
+                <label htmlFor="amount" className="form-label">
+                  Supplies Amount
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="exampleFormControlTextarea3"
+                  className="form-control"
+                  id="amount"
                   value={SupplyAmount}
                   onChange={handleAmount}
                   required
@@ -151,30 +151,28 @@ const UpdateSupplyer = () => {
               </div>
             </div>
             <div className="row py-3">
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Supply Date{" "}
+              <div className="col-md-6">
+                <label htmlFor="supplyDate" className="form-label">
+                  Supply Date
                 </label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="exampleFormControlTextarea3"
+                  type="date"
+                  className="form-control"
+                  id="supplyDate"
                   value={SupplyDate}
                   onChange={handleSupplyDate}
                   max={new Date().toISOString().split("T")[0]}
                   required
                 />
               </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">
-                  {" "}
-                  Total Price{" "}
+              <div className="col-md-6">
+                <label htmlFor="price" className="form-label">
+                  Total Price
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="exampleFormControlTextarea3"
+                  className="form-control"
+                  id="price"
                   value={totalPrice}
                   onChange={handletotPrice}
                   required
@@ -191,21 +189,18 @@ const UpdateSupplyer = () => {
                 onClick={(e) => UpdateData(e)}
                 className="btn btn-warning"
               >
-                {" "}
-                Update Supplier{" "}
+                Update Supplier
               </MDBBtn>
-              <a>
-                <Link to="/AllSuppliers">
-                  <MDBBtn
-                    rounded
-                    color="warning"
-                    type="submit"
-                    className="btn btn-success"
-                  >
-                    Back to Home{" "}
-                  </MDBBtn>
-                </Link>
-              </a>
+              <Link to="/AllSuppliers">
+                <MDBBtn
+                  rounded
+                  color="warning"
+                  type="submit"
+                  className="btn btn-success"
+                >
+                  Back to Home
+                </MDBBtn>
+              </Link>
             </div>
           </form>
         </div>
