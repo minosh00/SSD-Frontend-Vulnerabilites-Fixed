@@ -38,12 +38,18 @@ const Profile = () => {
 
   const details = async () => {
     let token = localStorage.getItem("token");
+    let user = localStorage.getItem("user");
+    let email = localStorage.getItem("email");
+    console.log(user); // Log the user value
+    setUserName(user); 
+    console.log(email); 
+    setUserEmail(email);
     let data = await AuthCustomer(token);
     console.log("current User", data?.data);
     setcurrentUserID(data?.data?._id);
-    setUserName(data?.data?.Fullname);
     setUserEmail(data?.data?.email);
   };
+  
 
   useEffect(() => {
     details();
@@ -53,7 +59,7 @@ const Profile = () => {
     const getRooms = async () => {
       try {
         const res = await axios.get(
-          `${StartUrl}api/book/getname/prasadi@gmail.com`
+          `${StartUrl}api/getname/prasadi@gmail.com`
         );
         setRooms(res.data);
         console.log("render");
