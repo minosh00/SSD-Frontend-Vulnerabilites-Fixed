@@ -102,12 +102,12 @@ function App() {
       <Route path="/updateRoomsByID/:id" element={<ProtectedRoute adminRequired={false} element={<UpdateRooms />} />} />
       <Route path="/updateRoomsByID1/:id/:fromdate/:todate" element={<ProtectedRoute adminRequired={false} element={<DisplayOneRoom />} />} />
       <Route path="/payroom" element={<ProtectedRoute adminRequired={false} element={<Room_Payment />} />} />
-      <Route path="/allbookingsroom" element={<ProtectedRoute adminRequired={false} element={<AllBookings />} />} />
-      <Route path="/cancelbook/:id" element={<ProtectedRoute adminRequired={false} element={<CancelBooking />} />} />
-      <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate" element={<ProtectedRoute adminRequired={false} element={<Booking />} />} />
-      <Route path="/comments-section" element={<ProtectedRoute adminRequired={false} element={<CommentsSection />} />} />
-      <Route path="//comments-section/create/:roomID" element={<ProtectedRoute adminRequired={false} element={<AddComment />} />} />
-      <Route path="/comments-section/edit/:roomID/:id" element={<ProtectedRoute adminRequired={false} element={<EditComment />} />} />
+      {/* <Route path="/allbookingsroom" element={<ProtectedRoute adminRequired={false} element={<AllBookings />} />} /> */}
+      {/* <Route path="/cancelbook/:id" element={<ProtectedRoute adminRequired={false} element={<CancelBooking />} />} /> */}
+      {/* <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate" element={<ProtectedRoute adminRequired={false} element={<Booking />} />} /> */}
+      {/* <Route path="/comments-section" element={<ProtectedRoute adminRequired={false} element={<CommentsSection />} />} /> */}
+      {/* <Route path="/comments-section/create/:roomID" element={<ProtectedRoute adminRequired={false} element={<AddComment />} />} /> */}
+      {/* <Route path="/comments-section/edit/:roomID/:id" element={<ProtectedRoute adminRequired={false} element={<EditComment />} />} /> */}
       <Route path="/allusers" element={<ProtectedRoute adminRequired={false} element={<AllUsers />} />} />
       <Route path="/cusroom" element={<CusRoom />} />
       <Route path="/Displaymenus" element={<Test />} />
@@ -116,8 +116,9 @@ function App() {
       <Route path="/allbookingsroom" element={<AllBookings />} />
       <Route path="/cancelbook/:id" element={<CancelBooking />} />
       <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate" element={<Booking />} />
-
-
+      <Route path="/comments-section"element={<CommentsSection />} />
+      <Route path="/comments-section/create/:roomID"  element={<AddComment />} />
+      <Route path="/comments-section/edit/:roomID/:id" element={<EditComment />} />
 
 
       </Routes>
