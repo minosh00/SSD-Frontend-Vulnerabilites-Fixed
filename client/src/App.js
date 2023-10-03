@@ -119,8 +119,8 @@ function App() {
       <Route path="/comments-section"element={<CommentsSection />} />
       <Route path="/comments-section/create/:roomID"  element={<AddComment />} />
       <Route path="/comments-section/edit/:roomID/:id" element={<EditComment />} />
-
-
+      <Route path="/mainroom" element={<MainRoom />} />
+      
       </Routes>
       <br />
       <Footer />
