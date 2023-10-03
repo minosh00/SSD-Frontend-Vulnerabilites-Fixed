@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Landingscreen from "./Components/Landingscreen";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
@@ -32,6 +32,7 @@ import AddComment from "./Components/Comments/AddComment";
 import EditComment from "./Components/Comments/EditComment";
 import Room_Payment from "./Components/Room/Customer/Room_Payment";
 import AllBookings from "./Components/Room/Admin/AllBookings";
+import NonAuth from "./Components/Auth/Nonauth";
 import CancelBooking from "./Components/Room/Customer/CancelBooking";
 import AllUsers from "./Components/Auth/AllUsers";
 
@@ -64,27 +65,17 @@ function App() {
         <Route exact path="/" element={<Landingscreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/UnAuthorized" element={<NonAuth />} />
 
-        {/* Example of conditional rendering based on userRole */}
-        {userRole === "admin" && (
+        {userRole === "admin" ? (
           <>
             <Route path="/AllEmployee" element={<AllEmployee />} />
             <Route path="/addemployee" element={<AddEmployee />} />
-            <Route
-              path="/updateEmployeeByID/:id"
-              element={<UpdateEmployee />}
-            />
-            <Route path="/AllSuppliers" element={<AllSuppliers />} />
-            <Route path="/addsupplier" element={<AddSupplier />} />
-            <Route
-              path="/updateSupplierByID/:id"
-              element={<UpdateSupplyer />}
-            />
-            <Route path="/AllMenus" element={<AllMenus />} />
-            <Route path="/updateMenuByID/:id" element={<EditMenu />} />
-            <Route path="/addMenu" element={<AddMenu />} />
-            <Route path="/Displaymenus" element={<Test />} />
+            <Route path="/updateEmployeeByID/:id" element={<UpdateEmployee />} />
+            {/* Other admin routes */}
           </>
+        ) : (
+          <Route path="*" element={<Navigate to="/UnAuthorized" />} />
         )}
 
         {/* Common routes accessible to all users */}
@@ -96,32 +87,16 @@ function App() {
         <Route path="/Displaymenus" element={<Test />} />
         <Route path="/payroom" element={<Room_Payment />} />
         <Route path="/cancelbook/:id" element={<CancelBooking />} />
-        <Route
-          path="/updateRoomsByIDcus/:id/:fromdate/:todate"
-          element={<Booking />}
-        />
+        <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate" element={<Booking />} />
         <Route path="/cusroom" element={<CusRoom />} />
         <Route path="/payroom" element={<Room_Payment />} />
         <Route path="/allbookingsroom" element={<AllBookings />} />
         <Route path="/cancelbook/:id" element={<CancelBooking />} />
-        <Route
-          path="/updateRoomsByIDcus/:id/:fromdate/:todate"
-          element={<Booking />}
-        />
         <Route path="/updateRoomsByID/:id" element={<UpdateRooms />} />
-        <Route
-          path="/updateRoomsByID1/:id/:fromdate/:todate"
-          element={<DisplayOneRoom />}
-        />
+        <Route path="/updateRoomsByID1/:id/:fromdate/:todate" element={<DisplayOneRoom />} />
         <Route path="/comments-section" element={<CommentsSection />} />
-        <Route
-          path="/comments-section/create/:roomID"
-          element={<AddComment />}
-        />
-        <Route
-          path="/comments-section/edit/:roomID/:id"
-          element={<EditComment />}
-        />
+        <Route path="/comments-section/create/:roomID" element={<AddComment />} />
+        <Route path="/comments-section/edit/:roomID/:id" element={<EditComment />} />
         <Route path="/allusers" element={<AllUsers />} />
       </Routes>
       <br />
