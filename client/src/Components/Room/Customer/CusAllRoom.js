@@ -5,7 +5,7 @@ import { Button, Modal, Carousel } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from 'antd';
 import moment from 'moment'
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 const CusAllRooms = () => {
   const { RangePicker } = DatePicker;
@@ -21,7 +21,7 @@ const CusAllRooms = () => {
   useEffect(async () => {
     try {
       const data = await (
-        await axios.get(`${StartUrl}api/rooms/`)
+        await axios.get(`${BASE_URL}/api/rooms/`)
       ).data;
       setusers(data);
     } catch (error) {
@@ -37,7 +37,7 @@ const CusAllRooms = () => {
   }
 
   function SearchAdult() {
-    axios.get(`${StartUrl}api/rooms/adult/${adult}`)
+    axios.get(`${BASE_URL}/api/rooms/adult/${adult}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -45,7 +45,7 @@ const CusAllRooms = () => {
   }
 
   function SearchChildren() {
-    axios.get(`${StartUrl}api/rooms/children/${children}`)
+    axios.get(`${BASE_URL}/api/rooms/children/${children}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -53,7 +53,7 @@ const CusAllRooms = () => {
   }
 
   function SearchBedroom() {
-    axios.get(`${StartUrl}api/rooms/bedroom/${bedroom}`)
+    axios.get(`${BASE_URL}/api/rooms/bedroom/${bedroom}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)

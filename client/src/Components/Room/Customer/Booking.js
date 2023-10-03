@@ -7,7 +7,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { AuthCustomer } from "../../../Services/AuthServices";
 import axios from "axios";
 import { getRoomsById } from "../services/Room";
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 const Booking = () => {
   const [Fullname, setUserName] = useState("");
@@ -53,7 +53,7 @@ const Booking = () => {
   useEffect(() => {
     const getRoom = async () => {
       try {
-        const res = await axios.get(`${StartUrl}api/rooms/${id}`);
+        const res = await axios.get(`${BASE_URL}/api/rooms/${id}`);
         setRoom(res.data);
         console.log("render");
       } catch (err) {
@@ -77,7 +77,7 @@ const Booking = () => {
 
     try {
       const result = await axios.post(
-        `${StartUrl}api/bookroom`,
+        `${BASE_URL}/api/bookroom`,
         bookingDetails
       );
     } catch (error) {}
@@ -86,7 +86,7 @@ const Booking = () => {
   async function handleToken(token) {
     try {
       // Send the token to your server for payment processing
-      const response = await axios.post(`${StartUrl}api/processPayment`, {
+      const response = await axios.post(`${BASE_URL}/api/processPayment`, {
         token,
         amount: room.rentperday * totDates * 100, // Convert to cents
       });

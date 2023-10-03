@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import "../Employee/Employee.css";
 import { ValidateAddNewMenu } from "./Validation";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AddSupplier = () => {
   const [suppliername, setfname] = useState("");
@@ -31,7 +31,7 @@ const AddSupplier = () => {
     if (validate.status === false) {
       window.alert(`${msg}`);
     } else {
-      axios.post(`${StartUrl}api/suppliers/`, Supplier);
+      axios.post(`${BASE_URL}/api/suppliers/`, Supplier);
 
       Swal.fire("Congrats", " New Supplier Added  successfully", "success");
 

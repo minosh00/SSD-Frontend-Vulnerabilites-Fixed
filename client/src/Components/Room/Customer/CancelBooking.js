@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 const CancelBooking = (props) => {
   const { id } = useParams("");
@@ -15,7 +15,7 @@ const CancelBooking = (props) => {
   useEffect(() => {
     const getRoom = async () => {
       try {
-        const res = await axios.get(`${StartUrl}api/getbookstatus/${id}`);
+        const res = await axios.get(`${BASE_URL}/api/getbookstatus/${id}`);
         setRoom(res.data);
         console.log("render");
       } catch (err) {
@@ -28,7 +28,7 @@ const CancelBooking = (props) => {
   function sendData(e) {
     e.preventDefault();
     axios
-      .put(`${StartUrl}api/updatestatus/${id}`, room)
+      .put(`${BASE_URL}/api/updatestatus/${id}`, room)
       .then((res) => {
         console.log(res.data);
         alert("Booking Status Updated Sucessfully");

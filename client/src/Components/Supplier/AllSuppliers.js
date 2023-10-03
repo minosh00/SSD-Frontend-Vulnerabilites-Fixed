@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import SupplyPdfReport from "./SupplyPdfReport";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AllSuppliers = () => {
   const [serachItem, setserachItem] = useState("");
@@ -15,7 +15,7 @@ const AllSuppliers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axios.get(`${StartUrl}api/suppliers/`);
+        const data = await axios.get(`${BASE_URL}/api/suppliers/`);
         setSupplier(data.data);
         setLoading(false);
       } catch (error) {
@@ -27,7 +27,7 @@ const AllSuppliers = () => {
   }, []);
 
   const removeSupplier = (id) => {
-    axios.delete(`${StartUrl}api/suppliers/${id}`).then((res) => {
+    axios.delete(`${BASE_URL}/api/suppliers/${id}`).then((res) => {
       Swal.fire("Congrats", "Remove Supplier successfully", "success");
     });
     setSupplier(Supplier.filter((elem) => elem._id !== id));

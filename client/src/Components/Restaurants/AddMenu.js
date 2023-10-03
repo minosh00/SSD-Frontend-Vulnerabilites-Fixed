@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { ValidateAddNewMenu } from "./Validation";
 import { MDBBtn } from "mdb-react-ui-kit";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AddMenu = () => {
   const [name, setfoodName] = useState("");
@@ -36,7 +36,7 @@ const AddMenu = () => {
         timerProgressBar: false,
       });
     } else {
-      axios.post(`${StartUrl}api/foods`, addmenu);
+      axios.post(`${BASE_URL}/api/foods`, addmenu);
       Swal.fire("Congrats", " New Menu Added  successfully", "success");
       navigate("/AllMenus");
     }

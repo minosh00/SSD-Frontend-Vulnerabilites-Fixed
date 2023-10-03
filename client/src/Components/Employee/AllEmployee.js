@@ -8,7 +8,7 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AllEmployee = () => {
   const [searchItem, setSearchItem] = useState("");
@@ -18,7 +18,7 @@ const AllEmployee = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${StartUrl}api/employees/`);
+        const response = await axios.get(`${BASE_URL}/api/employees/`);
         setEmployees(response.data);
         setLoading(false);
       } catch (error) {
@@ -31,7 +31,7 @@ const AllEmployee = () => {
 
   const removeEmployee = (id) => {
     axios
-      .delete(`${StartUrl}api/employees/${id}`)
+      .delete(`${BASE_URL}/api/employees/${id}`)
       .then(() => {
         Swal.fire("Congrats", "Remove Employee successfully", "success");
         setEmployees((prevEmployees) =>

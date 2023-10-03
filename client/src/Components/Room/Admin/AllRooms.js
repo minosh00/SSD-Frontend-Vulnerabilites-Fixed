@@ -4,7 +4,7 @@ import { Button, Modal, Carousel } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from 'antd';
 import moment from 'moment';
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 const AllRooms = () => {
   const { RangePicker } = DatePicker;
@@ -25,7 +25,7 @@ const AllRooms = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${StartUrl}api/rooms`);
+        const { data } = await axios.get(`${BASE_URL}/api/rooms`);
         setusers(data);
         setloading(false);
       } catch (error) {
@@ -43,7 +43,7 @@ const AllRooms = () => {
 
   const deleteRoom = async (id) => {
     try {
-      await axios.delete(`${StartUrl}api/rooms/${id}`);
+      await axios.delete(`${BASE_URL}/api/rooms/${id}`);
       const newRoom = users.filter(user => user._id !== id);
       setusers(newRoom);
     } catch (err) {
@@ -52,7 +52,7 @@ const AllRooms = () => {
   }
 
   function SearchAdult() {
-    axios.get(`${StartUrl}api/rooms/adult/${adult}`)
+    axios.get(`${BASE_URL}/api/rooms/adult/${adult}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -60,7 +60,7 @@ const AllRooms = () => {
   }
 
   function SearchChildren() {
-    axios.get(`${StartUrl}api/rooms/children/${children}`)
+    axios.get(`${BASE_URL}/api/rooms/children/${children}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -68,7 +68,7 @@ const AllRooms = () => {
   }
 
   function SearchBedroom() {
-    axios.get(`${StartUrl}api/rooms/bedroom/${bedroom}`)
+    axios.get(`${BASE_URL}/api/rooms/bedroom/${bedroom}`)
       .then(res => {
         console.log(res.data)
         setusers(res.data)
@@ -161,9 +161,9 @@ const AllRooms = () => {
                 .map((user) => (
                   <div className="row bs" key={user._id}><br></br>
                     <h3> {user.name}</h3> <br /><br />
-                    <div className="col-md-6"   >
+                    {/* <div className="col-md-6"   >
                       <img src={user.imageurls[0]} className="smallimg" alt="" />
-                    </div>
+                    </div> */}
 
                     <div className="col-md-6">
                       <h5> <b>{user.type} Room</b></h5> <br />
@@ -198,7 +198,7 @@ const AllRooms = () => {
                           {
                             user.imageurls.map(url => (
                               <Carousel.Item key={url}>
-                                <img className='d-block w-100 bigimg' src={url} alt="" />
+                                {/* <img className='d-block w-100 bigimg' src={url} alt="" /> */}
                                 <h5 id="roomdet">{user.description}</h5>
                               </Carousel.Item>
                             ))

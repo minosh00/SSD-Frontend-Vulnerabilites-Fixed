@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AllOrders = () => {
   const [searchItem, ] = useState("");
@@ -10,7 +10,7 @@ const AllOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`${StartUrl}api/orders/`);
+        const response = await axios.get(`${BASE_URL}/api/orders/`);
         setOrders(response.data);
         setLoading(false);
       } catch (error) {

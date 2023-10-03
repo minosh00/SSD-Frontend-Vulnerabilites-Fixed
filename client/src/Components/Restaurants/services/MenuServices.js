@@ -1,8 +1,8 @@
 import axios from "axios";
-import { StartUrl } from "../../../configs/Url.json";
-let getGroupURL = `${StartUrl}api/foods/`;
-let getGroupByIdURL = `${StartUrl}api/foods/`;
-let updateGroupByIdURL = `${StartUrl}api/foods/`;
+import { BASE_URL } from "../../../configs/Url.json";
+let getGroupURL = `${BASE_URL}/api/foods/`;
+let getGroupByIdURL = `${BASE_URL}/api/foods/`;
+let updateGroupByIdURL = `${BASE_URL}/api/foods/`;
 
 export async function updateMenuByID(id, data) {
   const alldata = {

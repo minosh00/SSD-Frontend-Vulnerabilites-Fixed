@@ -4,9 +4,9 @@ import Card from "../UI/Card";
 import classes from "./AvailableMeals.module.css";
 import MealItem from "./MealItem/MealItem";
 import Spinner from "../UI/Spinner";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
-const prodBaseUrl = `${StartUrl}api/foods`;
+const prodBaseUrl = `${BASE_URL}/api/foods`;
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);

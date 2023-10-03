@@ -1,9 +1,9 @@
 import axios from "axios";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
-let getRoomURL = `${StartUrl}api/api/rooms/`;
-let getRoomByIdURL = `${StartUrl}api/api/rooms/`;
-let updateRoomByIdURL = `${StartUrl}api/api/rooms/`;
+let getRoomURL = `${BASE_URL}/api/api/rooms/`;
+let getRoomByIdURL = `${BASE_URL}/api/api/rooms/`;
+let updateRoomByIdURL = `${BASE_URL}/api/api/rooms/`;
 
 export async function updateRoomByID(id, data) {
   const alldata = {

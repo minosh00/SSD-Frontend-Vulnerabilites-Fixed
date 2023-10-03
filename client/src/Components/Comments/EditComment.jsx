@@ -4,7 +4,7 @@ import InputField from "./InputFieldComponent/InputField";
 import CommentButton from "./Button/CommentButton";
 import TextArea from "./TextArea/TextArea";
 import axios from "axios";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 import "./styles/AddComment.css"
 
 const EditComment = () => {
@@ -21,7 +21,7 @@ const EditComment = () => {
 
   const getReview = (id) => {
     axios
-      .get(`${StartUrl}api/comments/${id}`)
+      .get(`${BASE_URL}/api/comments/${id}`)
       .then((res) => {
         console.log(res.data);
         setEmail(res.data.userEmail);
@@ -77,7 +77,7 @@ const EditComment = () => {
       };
 
       axios
-        .put(`${StartUrl}api/comments/${id}`, payload)
+        .put(`${BASE_URL}/api/comments/${id}`, payload)
         .then((_res) => {
           alert("Updated!");
         })

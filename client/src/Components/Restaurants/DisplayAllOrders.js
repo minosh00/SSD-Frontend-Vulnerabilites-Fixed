@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AllMenus = () => {
   const [searchItem, setSearchItem] = useState("");
   const [users, setUsers] = useState([]);
   const [, setLoading] = useState(true);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${StartUrl}api/orders/allorder`);
+        const response = await axios.get(`${BASE_URL}/api/orders/allorder`);
         setUsers(response.data);
         setLoading(false);
       } catch (error) {
@@ -77,12 +78,12 @@ const AllMenus = () => {
                 <tr key={user._id}>
                   <td>
                     <div className="d-flex align-items-center">
-                      <img
+                      {/* <img
                         src={user.images}
                         alt=""
                         style={{ width: "45px", height: "45px" }}
                         className="rounded-circle"
-                      />
+                      /> */}
                       <div className="ms-3">
                         <p className="fw-bold mb-1">{user.name}</p>
                       </div>
