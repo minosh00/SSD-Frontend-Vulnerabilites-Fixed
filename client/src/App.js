@@ -7,23 +7,14 @@ import Register from "./Components/Auth/Register";
 import Profile from "./Components/Auth/Profile";
 import NavBar from "./Components/Layouts/NavBar";
 import Footer from "./Components/Layouts/Footer";
-import AllMenus from "./Components/Restaurants/AllMenus";
 import Home from "./Components/Layouts/Main";
-import EditMenu from "./Components/Restaurants/EditMenu";
-import AddMenu from "./Components/Restaurants/AddMenu";
 import Test from "./Components/Test";
 import AllOrders from "./Components/Restaurants/AllOrders";
 import AllEmployee from "./Components/Employee/AllEmployee";
 import AddEmployee from "./Components/Employee/AddEmployee";
 import UpdateEmployee from "./Components/Employee/UpdateEmployee";
-import AllSuppliers from "./Components/Supplier/AllSuppliers";
-import AddSupplier from "./Components/Supplier/AddSupplier";
-import UpdateSupplyer from "./Components/Supplier/UpdateSupplyer";
-import AddRoom from "./Components/Room/Admin/AddRoom";
 import UpdateRooms from "./Components/Room/Admin/UpdateRooms";
 import DisplayOneRoom from "./Components/Room/Admin/DisplayOneRoom";
-import AllRooms from "./Components/Room/Admin/AllRooms";
-import MainRoom from "./Components/Room/Admin/MainRoom";
 import CusRoom from "./Components/Room/Customer/CusRoom";
 import Booking from "./Components/Room/Customer/Booking";
 import { BASE_URL } from "./configs/Url.json";
@@ -41,7 +32,7 @@ import "./App.css";
 import "../node_modules/font-awesome/css/font-awesome.min.css";
 
 function App() {
-  const [, setUser] = useState("");
+  // const [, setUser] = useState("");
   const [, setPosts] = useState([]);
   const [userRole, setUserRole] = useState(""); // State to store user role
 
