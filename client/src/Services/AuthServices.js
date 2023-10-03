@@ -1,14 +1,14 @@
 import axios from "axios";
-import { StartUrl } from "../configs/Url.json";
+import { BASE_URL } from "../configs/Url.json";
 
-let RegisterURL = StartUrl + "api/signup";
-let LoginURL = StartUrl + "api/signin";
-let AuthURL = StartUrl + "api/auth";
-let getAllUsers = StartUrl + "api/users";
-let CreateUser = StartUrl + "api/users";
-let UpdateUser = StartUrl + "api/users/";
-let DeleteUser = StartUrl + "api/users/";
-let GetUserByIDUrl = StartUrl + "api/users/";
+let RegisterURL = BASE_URL + "api/signup";
+let LoginURL = BASE_URL + "api/signin";
+let AuthURL = BASE_URL + "api/auth";
+let getAllUsers = BASE_URL + "api/users";
+let CreateUser = BASE_URL + "api/users";
+let UpdateUser = BASE_URL + "api/users/";
+let DeleteUser = BASE_URL + "api/users/";
+let GetUserByIDUrl = BASE_URL + "api/users/";
 
 export async function RegisterStudent(data) {
   const alldata = {

@@ -4,17 +4,32 @@ import CommentButton from "./Button/CommentButton";
 import Comment from "./Comment/Comment";
 import Like from "./LikeComponent/Like";
 import Search from "./Search/Search";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 import "./styles/CommentsSection.css";
 
 const CommentsSection = () => {
   const [comments, setComments] = useState([]);
   const [searchText, setSearchText] = useState("");
 
+  const handleRedirect = () => {
+    const pathnameParts = window.location.pathname.split("/");
+    const pathnameValue = pathnameParts.length >= 3 ? pathnameParts[2] : "";
+  
+    if (/^[a-zA-Z0-9_-]+$/.test(pathnameValue)) {
+      const redirectUrl = `/comments-section/create/${pathnameValue}`;
+  
+      // Redirect the user to the sanitized URL
+      window.location.href = redirectUrl;
+    } else {
+      console.error('Invalid input for redirection');
+    }
+  };
+
+  
   const getComments = (comment = '') => {
     console.log()
     axios
-      .get(`${StartUrl}api/comments?roomID=${window.location.pathname.split("/")[2]}&comment=${comment}`)
+      .get(`${BASE_URL}/api/comments?roomID=${window.location.pathname.split("/")[2]}&comment=${comment}`)
       .then((res) => {
         setComments(res.data);
       })
@@ -29,7 +44,7 @@ const CommentsSection = () => {
 
   const deleteComment = (id) => {
     axios
-    .delete(`${StartUrl}api/comments/${id}`)
+    .delete(`${BASE_URL}/api/comments/${id}`)
     .then((_res) => {
       alert('Done!');
       getComments();
@@ -42,7 +57,7 @@ const CommentsSection = () => {
 
   const addLike = (id) => {
     axios
-    .post(`${StartUrl}api/comments/${id}/addLike`)
+    .post(`${BASE_URL}/api/comments/${id}/addLike`)
     .then((_res) => {
       getComments();
     })
@@ -54,7 +69,7 @@ const CommentsSection = () => {
 
   const removeLike = (id) => {
     axios
-    .post(`${StartUrl}api/comments/${id}/removeLike`)
+    .post(`${BASE_URL}/api/comments/${id}/removeLike`)
     .then((_res) => {
       getComments();
     })
@@ -67,10 +82,6 @@ const CommentsSection = () => {
   useEffect(() => {
     getComments();
   }, []);
-
-  const handleRedirect = () => {
-    window.location.href = `/comments-section/create/${window.location.pathname.split("/")[2]}`;
-  };
 
   return (
     <div className="cs-background">
@@ -95,7 +106,7 @@ const CommentsSection = () => {
             username={comment.userEmail}
             key={comment._id}
             onDelete={() => deleteComment(comment._id)}
-            onEdit={() => window.location.href = `/comments-section/edit/${window.location.pathname.split("/")[2]}/${comment._id}`}
+           
           />
           <div className="like-section"><Like onChange={(clicked) => {!clicked? addLike(comment._id): removeLike(comment._id)}} /><span>{comment.likes}</span></div>
         </div>

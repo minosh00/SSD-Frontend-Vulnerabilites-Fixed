@@ -1,8 +1,8 @@
 import axios from "axios";
-import { StartUrl } from "../../../configs/Url.json";
-let getAllEmployeeURL = `${StartUrl}api/employees/`;
-let getEmployeeByIdURL = `${StartUrl}api/employees/`;
-let updateEmployeeByIDURL = `${StartUrl}api/employees/`;
+import { BASE_URL } from "../../../configs/Url.json";
+let getAllEmployeeURL = `${BASE_URL}/api/employees/`;
+let getEmployeeByIdURL = `${BASE_URL}/api/employees/`;
+let updateEmployeeByIDURL = `${BASE_URL}/api/employees/`;
 
 export async function updateEmployeeByID(id, data) {
   const alldata = {

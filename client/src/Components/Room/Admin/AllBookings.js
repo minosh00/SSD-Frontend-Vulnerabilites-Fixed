@@ -4,7 +4,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { Button } from "react-bootstrap";
 import RoomPdfReport from "./RoomPdfReport";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 function AllBookings() {
   const [room, setRoom] = useState([]);
@@ -12,7 +12,7 @@ function AllBookings() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${StartUrl}api/viewbook`);
+        const { data } = await axios.get(`${BASE_URL}/api/viewbook`);
         setRoom(data);
       } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ function AllBookings() {
 
   const deleteBooking = async (id) => {
     try {
-      await axios.delete(`${StartUrl}api/deletestatus/${id}`);
+      await axios.delete(`${BASE_URL}/api/deletestatus/${id}`);
       const newRoom = room.filter((booking) => booking._id !== id);
       setRoom(newRoom);
     } catch (err) {

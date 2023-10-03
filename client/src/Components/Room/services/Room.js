@@ -1,10 +1,10 @@
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 import axios from "axios";
-let getAllRoomspURL = `${StartUrl}api/rooms/`;
-let getRoomsByIdURL = `${StartUrl}api/rooms/`;
-let updateRoomsByIdURL = `${StartUrl}api/rooms/`;
-let updateRoomsByIdURL1 = `${StartUrl}api/rooms/`;
+let getAllRoomspURL = `${BASE_URL}/api/rooms/`;
+let getRoomsByIdURL = `${BASE_URL}/api/rooms/`;
+let updateRoomsByIdURL = `${BASE_URL}/api/rooms/`;
+let updateRoomsByIdURL1 = `${BASE_URL}/api/rooms/`;
 
 export async function updateRoomsByID(id, data) {
   const alldata = {

@@ -5,9 +5,9 @@ import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Checkout from "./Checkout";
 import StripeCheckout from "react-stripe-checkout";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
-const prodBaseUrl = `${StartUrl}api/orders`;
+const prodBaseUrl = `${BASE_URL}/api/orders`;
 
 const Cart = (props) => {
   const [isCheckout, setIsCheckout] = useState(false);

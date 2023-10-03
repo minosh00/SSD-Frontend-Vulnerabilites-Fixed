@@ -20,7 +20,7 @@ import {
 import RoomReport from "../Room/Customer/RoomReport";
 import { Button } from "react-bootstrap";
 
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 const { TabPane } = Tabs;
 const Profile = () => {
   const [Fullname, setUserName] = useState("");
@@ -59,7 +59,7 @@ const Profile = () => {
     const getRooms = async () => {
       try {
         const res = await axios.get(
-          `${StartUrl}api/getname/prasadi@gmail.com`
+          `${BASE_URL}/api/getname/prasadi@gmail.com`
         );
         setRooms(res.data);
         console.log("render");

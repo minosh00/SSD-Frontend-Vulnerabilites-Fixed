@@ -1,9 +1,9 @@
 import axios from "axios";
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
-let getAllSupplierURL = `${StartUrl}api/suppliers/`;
-let getSupplierByIdURL = `${StartUrl}api/suppliers/`;
-let updateSupplierByIDURL = `${StartUrl}api/suppliers/`;
+let getAllSupplierURL = `${BASE_URL}/api/suppliers/`;
+let getSupplierByIdURL = `${BASE_URL}/api/suppliers/`;
+let updateSupplierByIDURL = `${BASE_URL}/api/suppliers/`;
 
 export async function updateSupplierByID(id, data) {
   const alldata = {

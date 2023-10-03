@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { Validateroom } from "./roomVaildate";
 import { MDBBtn } from 'mdb-react-ui-kit'
-import { StartUrl } from "../../../configs/Url.json";
+import { BASE_URL } from "../../../configs/Url.json";
 
 const AddRoom = () => {
     const [name, setname] = useState("");
@@ -49,7 +49,7 @@ const AddRoom = () => {
             });
 
         } else {
-            axios.post(`${StartUrl}api/rooms`, AddRoom);
+            axios.post(`${BASE_URL}/api/rooms`, AddRoom);
             Swal.fire("Congrats", " New room  Added  successfully", "success")
             navigate("/mainroom");
         }

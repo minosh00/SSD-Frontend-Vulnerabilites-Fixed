@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { ValidateAddNewMenu } from "./Validation";
-import { StartUrl } from "../../configs/Url.json";
+import { BASE_URL } from "../../configs/Url.json";
 
 const AddEmployee = () => {
   const [fname, setfname] = useState("");
@@ -34,7 +34,7 @@ const AddEmployee = () => {
       Swal.fire("Error", validate.message, "error");
     } else {
       try {
-        await axios.post(`${StartUrl}api/employees/`, Employee);
+        await axios.post(`${BASE_URL}/api/employees/`, Employee);
 
         Swal.fire("Congrats", "New Employee Added successfully", "success");
 
