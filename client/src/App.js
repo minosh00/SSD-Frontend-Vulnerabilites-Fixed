@@ -67,8 +67,8 @@ function App() {
         <Route exact path="/" element={<Landingscreen />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/Profile" element={<Profile />} />
         <Route path="/UnAuthorized" element={<NonAuth />} />
+        <Route path="/allusers" element={<AllUsers />} />
 
 
         {userRole === "admin" ? (
@@ -80,17 +80,17 @@ function App() {
         <Route path="/addsupplier" element={<AddSupplier />} />
         <Route path="/updateSupplierByID/:id" element={<UpdateSupplyer />} />
         <Route path="/addMenu" element={<AddMenu />} />
-        <Route path="/AddRoom" element={<AddRoom />} />
         <Route path="/updateMenuByID/:id" element={<EditMenu />} />
-        <Route path="/allusers" element={<AllUsers />} />
-        <Route path="/AllMenus" element={<AllMenus />} />
+     
    </>
         ) : (
           <Route path="*" element={<Navigate to="/UnAuthorized" />} />
         )}
-
+        <Route path="/AllMenus" element={<AllMenus />} /> 
+        <Route exact path="/Profile" element={<Profile />} />   
         <Route exact path="/dashboard" element={<Home />} />
         <Route path="/AllOrders" element={<AllOrders />} />
+        <Route path="/AddRoom" element={<AddRoom />} />
         <Route path="/Displaymenus" element={<Test />} />
         <Route path="/mainroom" element={<MainRoom />} />
         <Route path="/allroom" element={<AllRooms />} />
