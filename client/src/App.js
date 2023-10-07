@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route , Navigate  } from "react-router-dom";
 import Landingscreen from "./Components/Landingscreen";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
@@ -35,6 +35,7 @@ import Room_Payment from "./Components/Room/Customer/Room_Payment";
 import AllBookings from "./Components/Room/Admin/AllBookings";
 import CancelBooking from "./Components/Room/Customer/CancelBooking";
 import AllUsers from "./Components/Auth/AllUsers";
+import NonAuth from "./Components/Auth/Nonauth";
 
 import "antd/dist/antd.css";
 import "./App.css";
@@ -43,6 +44,8 @@ import "../node_modules/font-awesome/css/font-awesome.min.css";
 function App() {
   const [, setUser] = useState("");
   const [, setPosts] = useState([]);
+  const [userRole, setUserRole] = useState(""); // State to store user role
+
 
   useEffect(() => {
     axios
@@ -52,7 +55,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setUser(localStorage.getItem("userRole"));
+    // Retrieve user role from your authentication system (e.g., after login)
+    const storedUserRole = localStorage.getItem("userRole");
+    setUserRole(storedUserRole);
   }, []);
 
   return (
@@ -63,48 +68,42 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/Profile" element={<Profile />} />
+        <Route path="/UnAuthorized" element={<NonAuth />} />
 
+
+        {userRole === "admin" ? (
+    <>
         <Route path="/AllEmployee" element={<AllEmployee />} />
         <Route path="/addemployee" element={<AddEmployee />} />
         <Route path="/updateEmployeeByID/:id" element={<UpdateEmployee />} />
         <Route path="/AllSuppliers" element={<AllSuppliers />} />
         <Route path="/addsupplier" element={<AddSupplier />} />
         <Route path="/updateSupplierByID/:id" element={<UpdateSupplyer />} />
+        <Route path="/addMenu" element={<AddMenu />} />
+        <Route path="/AddRoom" element={<AddRoom />} />
+        <Route path="/updateMenuByID/:id" element={<EditMenu />} />
+        <Route path="/allusers" element={<AllUsers />} />
+        <Route path="/AllMenus" element={<AllMenus />} />
+   </>
+        ) : (
+          <Route path="*" element={<Navigate to="/UnAuthorized" />} />
+        )}
 
         <Route exact path="/dashboard" element={<Home />} />
-        <Route path="/AllMenus" element={<AllMenus />} />
-        <Route path="/updateMenuByID/:id" element={<EditMenu />} />
-        <Route path="/addMenu" element={<AddMenu />} />
-
         <Route path="/AllOrders" element={<AllOrders />} />
         <Route path="/Displaymenus" element={<Test />} />
-
-        <Route path="/AddRoom" element={<AddRoom />} />
         <Route path="/mainroom" element={<MainRoom />} />
         <Route path="/allroom" element={<AllRooms />} />
         <Route path="/updateRoomsByID/:id" element={<UpdateRooms />} />
-        <Route
-          path="/updateRoomsByID1/:id/:fromdate/:todate"
-          element={<DisplayOneRoom />}
-        />
+        <Route path="/updateRoomsByID1/:id/:fromdate/:todate"  element={<DisplayOneRoom />} />
         <Route path="/cusroom" element={<CusRoom />} />
         <Route path="/payroom" element={<Room_Payment />} />
         <Route path="/allbookingsroom" element={<AllBookings />} />
         <Route path="/cancelbook/:id" element={<CancelBooking />} />
-        <Route
-          path="/updateRoomsByIDcus/:id/:fromdate/:todate"
-          element={<Booking />}
-        />
+        <Route path="/updateRoomsByIDcus/:id/:fromdate/:todate"  element={<Booking />}  />
         <Route path="/comments-section" element={<CommentsSection />} />
-        <Route
-          path="/comments-section/create/:roomID"
-          element={<AddComment />}
-        />
-        <Route
-          path="/comments-section/edit/:roomID/:id"
-          element={<EditComment />}
-        />
-        <Route path="/allusers" element={<AllUsers />} />
+        <Route path="/comments-section/create/:roomID" element={<AddComment />} />
+        <Route path="/comments-section/edit/:roomID/:id" element={<EditComment />} />
       </Routes>
       <br />
       <Footer />
